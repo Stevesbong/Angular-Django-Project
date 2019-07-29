@@ -1,0 +1,17 @@
+<div>
+  <!-- {{loginUser | json }} -->
+  <form (submit)="onSubmit()" class="form-group col-3 form-signin">
+    <div class="form-label-group">
+      <input type="text" name="loginUser.email" [(ngModel)]="loginUser.email" required [(ngModel)]="loginUser.email" #email="ngModel" class="form-control sm-3" placeholder="Email" required autofocus>
+      <small *ngIf=!email.valid class="form-text text-muted">Email is required</small>
+      <label>Email</label>
+    </div>
+    <div class="form-label-group">
+      <input type="text" name="loginUser.password" [(ngModel)]="loginUser.password" required [(ngModel)]="loginUser.password" #password="ngModel" class="form-control sm-3" placeholder="Password" required autofocus>
+      <small *ngIf=!password.valid class="form-text text-muted">Password is required</small>
+      <label>Password</label>
+    </div>
+      <button class="btn btn-outline-info">Log In</button>
+      <button class="btn btn-outline-info" [routerLink]="['/']">Cancel</button>
+  </form>
+</div>
