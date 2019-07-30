@@ -9,9 +9,14 @@ export class HttpService {
   constructor(private _http: HttpClient) { }
 
   getAll() {
-    return this._http.get('/tasks')
+    return this._http.get('api/tasks')
   }
-  create(tasks) {
-    return this._http.post('/tasks', tasks)
+  create(user) {
+    return this._http.post('api/tasks', user)
+  }
+  findUser(user) {
+    console.log('service', user);
+    
+    return this._http.post('api/tasks/user', user)
   }
 }

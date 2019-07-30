@@ -10,6 +10,7 @@ import { Router } from '@angular/router'
 export class RegisterFeatureComponent implements OnInit {
 
   newUser:any
+  errors:any = {}
 
   constructor(private _httpService: HttpService,
     private _router:Router) { }
@@ -27,15 +28,20 @@ export class RegisterFeatureComponent implements OnInit {
     console.log(this.newUser)
     this._httpService.create(this.newUser).subscribe((data:any)=> {
       console.log(data)
+      if(!data.hasOwnProperty('errors')) {
+        this._router.navigate(['/login'])
+      } else {
+        this.errors = data.errors
+      }
     })
   }
 
-  // getUser() {
-  //   this._httpService.getAll().subscribe((data:any) => {
-  //     console.log(data);
+  getUser() {
+    this._httpService.getAll().subscribe((data:any) => {
+      console.log(data);
       
-  //   })
-  // }
+    })
+  }
   // makeUser() {
   //   let tas = {
   //     'name': "Pappy",
