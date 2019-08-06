@@ -1,0 +1,135 @@
+* {
+    margin: 0.3em;
+}
+
+/* nav bar */
+.grid {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-areas:
+    "div"    
+}
+.grid > div {
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 1em;
+}
+div.user {
+    grid-column: 3 / 4;
+    grid-area:"div";
+    font-size: 1.2em;
+    text-align: right;
+    padding: 0.2em!important;
+}
+.user a {
+    text-decoration: none;
+    grid-area:"div";
+    color: rgb(162, 176, 212);
+    display: inline;
+}
+.user p.welcomeNav1 {
+    grid-area:"div";
+    padding: 0.2em!important;
+    display:inline;
+}
+.user a.welcomeNav2 {
+    text-decoration: none;
+    grid-area:"div";
+    color: rgb(162, 176, 212);
+    display:inline;
+}
+.user a:hover {
+    color:greenyellow;
+}
+.user a.welcomeNav2:hover {
+    color:red;
+}
+div.navs {
+    grid-area:"div";
+    grid-column: 3 / 4;
+    padding: 0.2em!important;
+    text-align: right;
+}
+
+/* fix nav bar refer to sample */
+a.nav-1 {
+    /* grid-column: 3 / 4; */
+    grid-area:"div";
+    text-align: center;
+}
+a.nav-2 {
+    /* grid-column: 3 / 4; */
+    grid-area:"div";
+    text-align: center;
+}
+a.nav-3 {
+    /* grid-column: 3 / 4; */
+    grid-area:"div";
+    text-align: center;
+}
+
+/* fix nav bar refer to sample */
+
+
+.grid > * {
+    border-radius: 5px;
+    
+    padding: 0.5em 0.5em;
+    color: rgb(162, 176, 212);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* nav bar */
+.main {
+    display: grid;
+    grid-gap: 1vw;
+    margin-top: 0.5em;
+    grid-template-areas:
+        "aside"
+        "article"
+        "footer";
+}
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr 1fr 1fr;
+
+    }
+    .main {
+      grid-template-columns: 1fr 4fr;
+      grid-template-areas:
+        "aside article"
+        "aside article"
+        "footer footer";
+    }
+}
+aside {
+    grid-area: aside;
+    grid-row: 1 / 2;
+}
+article {
+    grid-area: article;
+}
+footer {
+    grid-area: footer;
+}
+.main > * {
+    border-radius: 5px;
+    background-color: #054a8c;
+    padding: 0.5em 1em;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.main ul a {
+    display:block;
+    color: #fff;
+    text-decoration: none;
+}
+.main ul a:hover {
+    color: greenyellow;
+}
+.pagination-style /deep/ .ngx-pagination {
+    text-align: center;
+}

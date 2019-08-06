@@ -30,11 +30,15 @@ export class LoginFeatureComponent implements OnInit {
       if(!data.hasOwnProperty('errors')) {
         // temporary navigate.
         // later navigate it to success page
-        this._router.navigate(['/'])
+        // console.log('login component', data.user[0].id);
+        this._router.navigate(['/home', data.user[0].id])
       } else {
         this.errors = data.errors
       }
     })
+  }
+  goHome() {
+    this._router.navigate(['/home/1'])
   }
 
   

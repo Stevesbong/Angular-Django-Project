@@ -16,7 +16,9 @@ export class HttpService {
   }
   findUser(user) {
     console.log('service', user);
-    
     return this._http.post('api/tasks/user', user)
+  }
+  loggedInUser(id) {
+    return this._http.get('api/user/' + id)
   }
 }
