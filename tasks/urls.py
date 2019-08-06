@@ -21,5 +21,5 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('api/tasks', Users.as_view()),
     path('api/tasks/user', OneUser.as_view()),
-    path('tasks/<int:papaya_id>', UserDetail.as_view())
+    path('api/user/<int:user_id>', UserDetail.as_view())
 ]

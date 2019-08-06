@@ -39,15 +39,18 @@ class OneUser(View):
         if len(errors) > 0:
             return JsonResponse({'message': 'Error', 'errors':errors})
         else:
-            user = User.objects.filter(email = body['email'])
-            return JsonResponse({'message':"find"})
+            user = User.objects.filter(email = body['email']).values()
+            # print('check type', type(list(user)))
+            # print(json.dumps(user[0]))
+            return JsonResponse({'message':"find", 'user':list(user)})
 
 
 
 
 
 class UserDetail(View):
-    def get(self, request):
-        return JsonResponse({'message':"Success"})
+    def get(self, request, user_id):
+        user = User.objects.filter(id = user_id).values()
+        return JsonResponse({'message':"Success", 'user':list(user)})
     def put(self, request):
         return JsonResponse({'message':"Success"})

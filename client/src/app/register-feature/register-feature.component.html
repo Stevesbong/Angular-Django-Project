@@ -2,32 +2,32 @@
     <form (submit)="onSubmit()" class="form-group col-3">
         <div class="form-label-group">
             <input type="text" name="newUser.first_name" [(ngModel)]="newUser.first_name" required [(ngModel)]="newUser.first_name" #first_name="ngModel" class="form-control" placeholder="First name" required autofocus>
-            <small *ngIf="!first_name.valid && !errors.first_name" class="form-text text-muted">First name is required</small>
-            <small *ngIf="errors.first_name">{{errors.first_name}}</small>
+            <small *ngIf="!first_name.valid && !errors.first_name" class="form-text text-muted">* First name is required</small>
+            <small *ngIf="errors.first_name">* {{errors.first_name}}</small>
             <label>First name</label>
         </div>
         <div class="form-label-group">
             <input type="text" name="newUser.last_name" [(ngModel)]="newUser.last_name" required [(ngModel)]="newUser.last_name" #last_name="ngModel" class="form-control sm-3" placeholder="Last Name" required autofocus>
-            <small *ngIf="!last_name.valid && !errors.last_name" class="form-text text-muted">Last name is required</small>
-            <small *ngIf="errors.last_name">{{errors.last_name}}</small>
+            <small *ngIf="!last_name.valid && !errors.last_name" class="form-text text-muted">* Last name is required</small>
+            <small *ngIf="errors.last_name">* {{errors.last_name}}</small>
             <label>Last Name</label>
         </div>
         <div class="form-label-group">
             <input type="text" name="newUser.email" [(ngModel)]="newUser.email" required [(ngModel)]="newUser.email" #email="ngModel" class="form-control sm-3" placeholder="Email" required autofocus>
-            <small *ngIf="!email.valid && !errors.email" class="form-text text-muted">Email is required</small>
-            <small *ngIf="errors.email">{{errors.email}}</small>
-            <small *ngIf="errors.taken_email">{{errors.taken_email}}</small>
+            <small *ngIf="!email.valid && !errors.email" class="form-text text-muted">* Email is required</small>
+            <small *ngIf="errors.email">* {{errors.email}}</small>
+            <small *ngIf="errors.taken_email">* {{errors.taken_email}}</small>
             <label>Email</label>
         </div>
         <div class="form-label-group">
             <input type="text" name="newUser.password" [(ngModel)]="newUser.password" required [(ngModel)]="newUser.password" #password="ngModel" class="form-control sm-3" placeholder="Password" required autofocus>
-            <small *ngIf="!password.valid && !errors.password" class="form-text text-muted">Password is required</small>
-            <small *ngIf="errors.password">{{errors.password}}</small>
+            <small *ngIf="!password.valid && !errors.password" class="form-text text-muted">* Password is required</small>
+            <small *ngIf="errors.password">* {{errors.password}}</small>
             <label>Password</label>
         </div>
         <div class="form-label-group">
             <input type="text" name="newUser.confirm_password" [(ngModel)]="newUser.confirm_password" required [(ngModel)]="newUser.confirm_password" #confirm_password="ngModel" class="form-control sm-3" placeholder="Confirm Password" required autofocus>
-            <small *ngIf="newUser.password != newUser.confirm_password" class="form-text text-muted">Confirm password have to match with password!</small>
+            <small *ngIf="newUser.password != newUser.confirm_password" class="form-text text-muted">* Confirm password have to match with password!</small>
             <label>Confirm Password</label>
         </div>
         <button class="btn btn-outline-info">Register</button>

@@ -1,0 +1,48 @@
+<div class="grid">
+    <div class="user" *ngIf="oneUser; else elseBlock">
+        <a href="">Cart ( 0 ) </a>
+        <p class="welcomeNav1" >Welcome, {{oneUser.first_name}}</p>
+        <a class="welcomeNav2"  href="" (click)="goHome()">Log out</a>
+    </div>
+    <ng-template #elseBlock>
+        <div class="navs">
+            <a class="nav-1" [routerLink]="['/']">Home</a>
+            <a class="nav-2" [routerLink]="['/register']">Sign up</a> 
+            <a class="nav-3" [routerLink]="['/login']">Sign in</a>
+        </div>
+    </ng-template>
+</div>
+<div class="main">
+    <aside>
+        <p>Categories</p>
+        <ul>
+            <a [routerLink]="" (click)="makeComputerFilterFunction()">computer</a>
+            <a [routerLink]="" (click)="makeAccessoriesFilterFunction()">accessories</a>
+            <a [routerLink]="" (click)="makeMonitersFilterFunction()">monitors</a>
+        </ul>
+        <form (submit)="onSumbit()" class="form-inline">
+            <div class="form-group">
+                <input type="text" class="form-control col-7" placeholder="Search" required autofocus>
+                <button type="submit">icon</button>
+            </div>
+        </form>
+    </aside>
+    <article>
+        <ul>
+            <li> Emp Name | Emp code</li>
+            <li *ngFor="let item of allProduct | paginate:{itemsPerPage: 5, currentPage:p}">     
+            {{item.name}} | {{item.code}}</li> 
+        </ul>
+        <pagination-controls class="pagination-style" (pageChange)="p=$event"
+        maxSize="10"
+        directionLinks="true"
+        autoHide="true"
+        responsive="true"
+        previousLabel="Previous"
+        nextLabel="Next"
+        screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page"
+        screenReaderCurrentLabel="You're on page"></pagination-controls>
+    </article>
+    <footer>bottom</footer>
+</div>
