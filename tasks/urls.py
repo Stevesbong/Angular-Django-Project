@@ -15,11 +15,12 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.urls import path
-from tasks_app.views import Users, UserDetail, OneUser
+from tasks_app.views import Users, UserDetail, OneUser, UserLogOut
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('api/tasks', Users.as_view()),
     path('api/tasks/user', OneUser.as_view()),
-    path('api/user/<int:user_id>', UserDetail.as_view())
+    path('api/user/<int:user_id>', UserDetail.as_view()),
+    path('api/user/logout', UserLogOut.as_view())
 ]

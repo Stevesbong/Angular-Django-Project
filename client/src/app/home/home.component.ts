@@ -12,28 +12,54 @@ import { HttpService } from '../http.service';
 export class HomeComponent implements OnInit {
 
   allProduct:any =[]
+  oneUser:any
   constructor(private _httpService:HttpService,
     private _router: Router,
     private _activatedRoute:ActivatedRoute) { }
 
-    oneUser:any
   ngOnInit() {
-    this._activatedRoute.params.subscribe((params:Params) => {
-      this.getOneUser(params.id)
-    })
+      this.getOneUser()
 
     for(let i=1;i<=100;i++){
       let Obj = {'name': `Employee Name ${i}`,'code': `EMP00 ${i}`}
       this.allProduct.push(Obj);
     }
-    console.log(this.allProduct)
+    // console.log(this.allProduct)
   }
 
-  getOneUser(id) {
-    this._httpService.loggedInUser(id).subscribe((data:any) => {
-      this.oneUser = data.user[0]      
+  getOneUser() {
+    this._httpService.logInUser().subscribe((data:any) => {
+      console.log('logInUser', data, data.id);
+      if(data.id){
+        console.log('check id', data.id);
+        
+        this._httpService.loggedInUser(data.id).subscribe((data:any) => {
+          console.log('data from loggedInUser', data.user[0]);
+          this.oneUser = data.user[0]
+        })
+      } else {
+        console.log('error');
+        
+        this._router.navigate(['/'])
+      }
     })
+  }
 
+
+
+
+  logOut() {
+    this.oneUser = ""
+    this._httpService.logOutUser().subscribe((data:any) => {
+      console.log(data)
+      if(data) {
+        console.log('hello');
+        this._router.navigate(['/'])
+        console.log('another hello');
+      }
+    })
+    console.log('user logout');
+    this._router.navigate(['/'])
   }
 
   makeComputerFilterFunction() {

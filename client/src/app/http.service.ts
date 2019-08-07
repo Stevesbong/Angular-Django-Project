@@ -18,7 +18,13 @@ export class HttpService {
     console.log('service', user);
     return this._http.post('api/tasks/user', user)
   }
+  logInUser() {
+    return this._http.get('api/tasks/user')
+  }
   loggedInUser(id) {
-    return this._http.get('api/user/' + id)
+    return this._http.get('api/user/' +id)
+  }
+  logOutUser() {
+    return this._http.get('api/user/logout')
   }
 }

@@ -2,7 +2,7 @@
   <!-- {{loginUser | json }} -->
   <form (submit)="onSubmit()" class="form-group col-3 form-signin">
     <div class="form-label-group">
-      <input type="text" name="loginUser.email" [(ngModel)]="loginUser.email" required [(ngModel)]="loginUser.email" #email="ngModel" class="form-control sm-3" placeholder="Email" required autofocus>
+        <input type="text" name="loginUser.email" [(ngModel)]="loginUser.email" required [(ngModel)]="loginUser.email" #email="ngModel" class="form-control sm-3" placeholder="Email" required autofocus>
       <small *ngIf="!email.valid && !errors.login_email" class="form-text text-muted">* Email is required</small>
       <small *ngIf="errors.login_email">* {{errors.login_email}}</small>
       <label>Email</label>

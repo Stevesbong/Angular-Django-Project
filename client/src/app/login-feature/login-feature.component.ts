@@ -5,7 +5,8 @@ import { Router } from '@angular/router'
 @Component({
   selector: 'app-login-feature',
   templateUrl: './login-feature.component.html',
-  styleUrls: ['./../register-feature/register-feature.component.css']
+  styleUrls: ['./login-feature.component.css',
+  '../register-feature/register-feature.component.css']
 })
 export class LoginFeatureComponent implements OnInit {
 
@@ -31,14 +32,15 @@ export class LoginFeatureComponent implements OnInit {
         // temporary navigate.
         // later navigate it to success page
         // console.log('login component', data.user[0].id);
-        this._router.navigate(['/home', data.user[0].id])
+        // this._router.navigate(['/home', data.user[0].id])
+        this._router.navigate(['/home'])
       } else {
         this.errors = data.errors
       }
     })
   }
   goHome() {
-    this._router.navigate(['/home/1'])
+    this._router.navigate(['/'])
   }
 
   
