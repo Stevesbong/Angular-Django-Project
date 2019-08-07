@@ -2,7 +2,7 @@
     <div class="user" *ngIf="oneUser; else elseBlock">
         <a href="">Cart ( 0 ) </a>
         <p class="welcomeNav1" >Welcome, {{oneUser.first_name}}</p>
-        <a class="welcomeNav2"  href="" (click)="goHome()">Log out</a>
+        <a class="welcomeNav2" [routerLink]="" (click)="logOut()">Log out</a>
     </div>
     <ng-template #elseBlock>
         <div class="navs">

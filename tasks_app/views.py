@@ -30,6 +30,13 @@ class Users(View):
             
 
 class OneUser(View):
+    def get(self, req):
+        print('hitting here?')
+        if 'user_id' in req.session:
+            print('here?')
+            return JsonResponse({'message':"oneUser", 'id':req.session['user_id']})
+        return JsonResponse({'message':"error occur"})
+
     def post(self, req):
         # print('no decode', type(req.body), req.body)
         body = json.loads(req.body.decode())
@@ -40,8 +47,9 @@ class OneUser(View):
             return JsonResponse({'message': 'Error', 'errors':errors})
         else:
             user = User.objects.filter(email = body['email']).values()
-            # print('check type', type(list(user)))
-            # print(json.dumps(user[0]))
+            print('print user post', user[0])
+            req.session['logged_in'] = True
+            req.session['user_id'] = user[0]['id']
             return JsonResponse({'message':"find", 'user':list(user)})
 
 
@@ -50,7 +58,13 @@ class OneUser(View):
 
 class UserDetail(View):
     def get(self, request, user_id):
-        user = User.objects.filter(id = user_id).values()
+        user = User.objects.filter(id = user_id).values()        
         return JsonResponse({'message':"Success", 'user':list(user)})
     def put(self, request):
         return JsonResponse({'message':"Success"})
+
+class UserLogOut(View):
+    def get(self, request):
+        del request.session['logged_in']
+        del request.session['user_id']
+        return JsonResponse({'message':"User Logged Out"})
