@@ -2,7 +2,10 @@ from __future__ import unicode_literals
 from django.db import models
 import re
 import bcrypt
+from django.conf import settings
+import os, time, base64
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+ALLOWED_EXTENSIONS = ("jpg", "jpeg", "png", "gif")
 
 # Create your models here.
 
@@ -47,7 +50,6 @@ class UserManager(models.Manager):
             errors['login_password'] = "Invalied Credential"
         return errors
 
-
 class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -56,3 +58,22 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(null = True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    stock = models.PositiveIntegerField()
+    category = models.CharField(max_length = 60)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Image(models.Model):
+    product = models.ForeignKey(Product, related_name="image_of_product", on_delete=models.CASCADE)
+    image = models.FileField(upload_to='media/')
+
+class Order(models.Model):
+    product = models.ManyToManyField(Product, related_name = "orders")
+    user = models.ForeignKey(User, related_name = "user_order", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

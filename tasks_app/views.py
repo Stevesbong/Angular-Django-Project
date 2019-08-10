@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.contrib import messages
 import json, bcrypt
-from .models import User, UserManager
+from .models import User, UserManager, Product
 
 # Create your views here.
 
@@ -27,8 +27,6 @@ class Users(View):
             print(hashpw.decode())
             user = User.objects.create(first_name = body['first_name'], last_name = body['last_name'], email = body['email'], password = hashpw.decode())
             return JsonResponse({'message':'Success'})
-            
-
 class OneUser(View):
     def get(self, req):
         print('hitting here?')
@@ -51,20 +49,43 @@ class OneUser(View):
             req.session['logged_in'] = True
             req.session['user_id'] = user[0]['id']
             return JsonResponse({'message':"find", 'user':list(user)})
-
-
-
-
-
 class UserDetail(View):
     def get(self, request, user_id):
         user = User.objects.filter(id = user_id).values()        
         return JsonResponse({'message':"Success", 'user':list(user)})
     def put(self, request):
         return JsonResponse({'message':"Success"})
-
 class UserLogOut(View):
     def get(self, request):
         del request.session['logged_in']
         del request.session['user_id']
         return JsonResponse({'message':"User Logged Out"})
+
+
+
+class Products(View):
+    def get(self, request):
+        print('came in get view')
+        return JsonResponse({'message':"product get Success", 'products':list(Product.objects.values().all())})
+
+    def post(self, request):
+        body = json.loads(request.body.decode())
+        print('came in post view', type(body), body)
+        product = Product.objects.create(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
+        return JsonResponse({'message':"product post Success"})
+
+
+# class Author(models.Model):
+#     name = models.CharField(max_length=255)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+# class Book(models.Model):
+#     title = models.CharField(max_length=255)
+#     author = models.ForeignKey(Author, related_name="books")
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+# this_author = Author.objects.get(id=2)	# get an instance of an Author
+# my_book = Book.objects.create(title="Little Women", author=this_author)	# set the retrieved author as the author of a new book
+    
+# # or in one line...
+# my_book = Book.objects.create(title="Little Women", author=Author.objects.get(id=2))

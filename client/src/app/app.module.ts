@@ -10,13 +10,15 @@ import { LoginFeatureComponent } from './login-feature/login-feature.component';
 import { RegisterFeatureComponent } from './register-feature/register-feature.component';
 import { HomeComponent } from './home/home.component'
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFeatureComponent,
     RegisterFeatureComponent,
-    HomeComponent
+    HomeComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
