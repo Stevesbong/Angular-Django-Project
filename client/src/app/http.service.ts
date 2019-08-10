@@ -27,4 +27,10 @@ export class HttpService {
   logOutUser() {
     return this._http.get('api/user/logout')
   }
+  allProduct() {
+    return this._http.get('api/product')
+  }
+  createProduct(product) {
+    return this._http.post('api/product', product)
+  }
 }

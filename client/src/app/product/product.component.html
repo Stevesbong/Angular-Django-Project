@@ -1,0 +1,53 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Description</th>
+            <th>Product Price</th>
+            <th>Product Stock</th>
+            <th>Product Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of allProducts">
+            <td>{{p.name}}</td>
+            <td>{{p.description}}</td>
+            <td>{{p.price}}</td>
+            <td>{{p.stock}}</td>
+            <td>{{p.category}}</td>
+            <td>View | Edit | Delete</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Upload Product</h2>
+<form (submit)="onSubmit()" class="form-group col-8">
+    <div class="form-row">
+        <div class="form-label-group col">
+            <input name="newProduct.name" [(ngModel)]="newProduct.name" #name="ngModel" type="text" placeholder="Product Name" class="form-control" required autofocus>
+            <label for="">Product Name</label>
+        </div>
+        <div class="form-label-group col">
+            <input name="newProduct.price" [(ngModel)]="newProduct.price" #price="ngModel" type="number" placeholder="Product Price" class="form-control" required autofocus step="any" >
+            <label for="">Product Price</label>
+            
+        </div>
+        <div class="form-label-group col">
+            <input name="newProduct.stock" [(ngModel)]="newProduct.stock" #stock="ngModel" type="number" placeholder="Product Stock" class="form-control" required autofocus>
+            <label for="">Product Stock</label>
+        </div>
+        <div class="form-label-group col">
+            <input name="newProduct.category" [(ngModel)]="newProduct.category" #category="ngModel" type="text" placeholder="Category" class="form-control" required autofocus>
+            <label for="">Category</label>
+        </div>
+    </div>
+    <div class="form-label-group">
+        <textarea name="newProduct.description" [(ngModel)]="newProduct.description" #description="ngModel" placeholder="Product Description" class="form-control" cols="30" rows="10" required autofocus></textarea>
+    </div>
+    <!-- <div class="custom-file">
+        <input name="newProduct.file" [(ngModel)]="newProduct.file" #file="ngModel" id="inputGroupFile01" type="file" class="custom-file-input">
+        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+    </div> -->
+    <button class="btn btn-outline-primary" type="input">Create Product</button>
+</form>

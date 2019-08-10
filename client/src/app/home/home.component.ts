@@ -11,20 +11,15 @@ import { HttpService } from '../http.service';
 })
 export class HomeComponent implements OnInit {
 
-  allProduct:any =[]
+  allProducts:any =[]
   oneUser:any
   constructor(private _httpService:HttpService,
     private _router: Router,
     private _activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
-      this.getOneUser()
-
-    for(let i=1;i<=100;i++){
-      let Obj = {'name': `Employee Name ${i}`,'code': `EMP00 ${i}`}
-      this.allProduct.push(Obj);
-    }
-    // console.log(this.allProduct)
+    this.getOneUser()
+    this.getAllProduct()
   }
 
   getOneUser() {
@@ -32,16 +27,22 @@ export class HomeComponent implements OnInit {
       console.log('logInUser', data, data.id);
       if(data.id){
         console.log('check id', data.id);
-        
         this._httpService.loggedInUser(data.id).subscribe((data:any) => {
           console.log('data from loggedInUser', data.user[0]);
           this.oneUser = data.user[0]
         })
       } else {
         console.log('error');
-        
         this._router.navigate(['/'])
       }
+    })
+  }
+  getAllProduct() {
+    console.log('get all Product')
+    this._httpService.allProduct().subscribe((data:any) => {
+      console.log('get all product from django server')
+      console.log('data from django server', data.products);
+      this.allProducts = data.products
     })
   }
 

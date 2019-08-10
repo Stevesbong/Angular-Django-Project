@@ -1,17 +1,20 @@
-<div class="grid">
-    <div class="user" *ngIf="oneUser; else elseBlock">
-        <a href="">Cart ( 0 ) </a>
-        <p class="welcomeNav1" >Welcome, {{oneUser.first_name}}</p>
-        <a class="welcomeNav2" [routerLink]="" (click)="logOut()">Log out</a>
-    </div>
-    <ng-template #elseBlock>
-        <div class="navs">
-            <a class="nav-1" [routerLink]="['/']">Home</a>
-            <a class="nav-2" [routerLink]="['/register']">Sign up</a> 
-            <a class="nav-3" [routerLink]="['/login']">Sign in</a>
+<div class="grid" *ngIf="oneUser; else elseBlock">
+        <a [routerLink]="['/product']" class="admins" *ngIf="oneUser.first_name=='admin'">Product</a>
+        <div class="homes">
+            <a class="welcomeNav1" href="">Cart ( 0 ) </a>
+            <a class="welcomeNav2" [routerLink]="" >Welcome, {{oneUser.first_name}}</a>
+            <a class="welcomeNav3" [routerLink]="" (click)="logOut()">Log out</a>
         </div>
-    </ng-template>
-</div>
+    </div>
+    <div class="grid">
+        <ng-template #elseBlock>
+            <div class="navs">
+                <a class="nav-1" [routerLink]="['/']">Home</a>
+                <a class="nav-2" [routerLink]="['/register']">Sign up</a> 
+                <a class="nav-3" [routerLink]="['/login']">Sign in</a>
+            </div>
+        </ng-template>
+    </div>
 <div class="main">
     <aside>
         <p>Categories</p>
@@ -30,8 +33,8 @@
     <article>
         <ul>
             <li> Emp Name | Emp code</li>
-            <li *ngFor="let item of allProduct | paginate:{itemsPerPage: 5, currentPage:p}">     
-            {{item.name}} | {{item.code}}</li> 
+            <li *ngFor="let item of allProducts | paginate:{itemsPerPage: 4, currentPage:p}">     
+            {{item.name}} | {{item.description}} | {{item.price}} | {{item.stock}} | {{item.category}}</li> 
         </ul>
         <pagination-controls class="pagination-style" (pageChange)="p=$event"
         maxSize="10"
