@@ -1,3 +1,7 @@
+<div class="grid navs">
+    <a class="nav-1" [routerLink]="['/']">Home</a>
+</div>
+<h1>Product List</h1>
 <table class="table">
     <thead>
         <tr>
@@ -16,7 +20,25 @@
             <td>{{p.price}}</td>
             <td>{{p.stock}}</td>
             <td>{{p.category}}</td>
-            <td>View | Edit | Delete</td>
+            <td><button class="btn btn-outline-primary" [routerLink]="['/product', p.id]">View</button> | <button class="btn btn-outline-info" [routerLink]="['/product', 'edit', p.id]">Edit</button> | <button (click)="deleteProduct(p.id)" class="btn btn-outline-danger" >Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+<h1>User Order List</h1>
+<a class="nav-1" [routerLink]="['/']">Home</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>User Order</th>
+            <th>Order Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td>Order Name</td>
+            <td>Detail</td>
         </tr>
     </tbody>
 </table>

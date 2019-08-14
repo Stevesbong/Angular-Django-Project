@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.views import View
 from django.contrib import messages
 import json, bcrypt
@@ -66,7 +67,10 @@ class UserLogOut(View):
 class Products(View):
     def get(self, request):
         print('came in get view')
-        return JsonResponse({'message':"product get Success", 'products':list(Product.objects.values().all())})
+        access = True
+        if 'logged_in' not in request.session:
+            access = False
+        return JsonResponse({'message':"product get Success", 'products':list(Product.objects.values().all()), 'logged_in':access})
 
     def post(self, request):
         body = json.loads(request.body.decode())
@@ -74,6 +78,19 @@ class Products(View):
         product = Product.objects.create(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
         return JsonResponse({'message':"product post Success"})
 
+class ProductsDetail(View):
+    def get(self, request, product_id):
+        print('came in get detail view', product_id)
+        product = Product.objects.filter(id = product_id).values()
+        return JsonResponse({'message':"Product get view Success", 'product':list(product)})
+    def put(self, request, product_id):
+        print('came in put detail view')
+        return JsonResponse({'message':"Product put view Success"})
+    def delete(self, request, product_id):
+        print('came in delete detail view', product_id)
+        product = Product.objects.get(id = product_id)
+        product.delete()
+        return JsonResponse({'message':"Product delete view Success"})
 
 # class Author(models.Model):
 #     name = models.CharField(max_length=255)

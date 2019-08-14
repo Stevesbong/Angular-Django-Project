@@ -1,0 +1,26 @@
+<div class="grid">
+    <div class="navs">
+        <a class="nav-1" [routerLink]="['/']">Home</a>
+        <a class="nav-1" [routerLink]="['/product']">Product List</a>
+    </div>
+</div>
+<div *ngIf="oneProduct" class="container" style="margin: 0 auto;">
+    
+    <div class="images">
+        <img src="https://cdn.pixabay.com/photo/2018/05/28/22/11/message-in-a-bottle-3437294__340.jpg" style="margin: 50px"alt="">
+    </div>
+    <div class="productsDescription">
+        <h2>{{oneProduct.name}}</h2>
+        <h3>$ {{oneProduct.price}}</h3>
+        <p>Product Quantity: {{oneProduct.stock}}</p>
+        <p *ngIf="oneProduct.stock > 1 else elseblock" > In Stock</p>
+        <ng-template #elseblock>
+           <p class="outStock">Out of Stock</p>
+        </ng-template>
+        <p>Product Description: {{oneProduct.description}}</p>
+        <form>
+            <button>Add to Cart</button>
+            <button>Buy It now</button>
+        </form>
+    </div>
+</div>

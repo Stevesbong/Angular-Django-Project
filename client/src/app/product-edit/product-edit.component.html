@@ -1,0 +1,34 @@
+<div *ngIf="oneProduct" class="container">
+    <h1>Product Edit Page</h1>
+    <a class="nav-1" [routerLink]="['/']">Home</a>
+    <a class="nav-1" [routerLink]="['/product']">Product List</a>
+    <form (submit)="onSubmit()" class="form-group col-8">
+        <div class="form-row">
+            <div class="form-label-group col">
+                <input name="oneProduct.name" [(ngModel)]="oneProduct.name" #name="ngModel" type="text" placeholder="Product Name" class="form-control" required autofocus>
+                <label for="">Product Name</label>
+            </div>
+            <div class="form-label-group col">
+                <input name="oneProduct.price" [(ngModel)]="oneProduct.price" #price="ngModel" type="number" placeholder="Product Price" class="form-control" required autofocus step="any" >
+                <label for="">Product Price</label>
+                
+            </div>
+            <div class="form-label-group col">
+                <input name="oneProduct.stock" [(ngModel)]="oneProduct.stock" #stock="ngModel" type="number" placeholder="Product Stock" class="form-control" required autofocus>
+                <label for="">Product Stock</label>
+            </div>
+            <div class="form-label-group col">
+                <input name="oneProduct.category" [(ngModel)]="oneProduct.category" #category="ngModel" type="text" placeholder="Category" class="form-control" required autofocus>
+                <label for="">Category</label>
+            </div>
+        </div>
+        <div class="form-label-group">
+            <textarea name="oneProduct.description" [(ngModel)]="oneProduct.description" #description="ngModel" placeholder="Product Description" class="form-control" cols="30" rows="10" required autofocus></textarea>
+        </div>
+        <!-- <div class="custom-file">
+            <input name="newProduct.file" [(ngModel)]="newProduct.file" #file="ngModel" id="inputGroupFile01" type="file" class="custom-file-input">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div> -->
+        <button class="btn btn-outline-primary" type="input">Edit Product</button>
+    </form>
+</div>
