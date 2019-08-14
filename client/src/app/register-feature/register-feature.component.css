@@ -71,6 +71,6 @@ button {
 small {
     color:red!important;
 }
-input.ng-invalid {
+input.ng-invalid, textarea.ng-invalid {
     border: 1px solid red !important;
 }

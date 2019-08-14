@@ -41,9 +41,25 @@ export class ProductComponent implements OnInit {
   getAllProduct() {
     console.log('get all Product')
     this._httpService.allProduct().subscribe((data:any) => {
-      console.log('get all product from django server')
-      console.log('data from django server', data.products);
-      this.allProducts = data.products
+      
+      console.log('helllllll');
+      console.log(data.logged_in);
+      if(data.logged_in == true) {
+        console.log('get all product from django server')
+        console.log('data from django server', data.products);
+        this.allProducts = data.products
+      } else {
+        console.log('hi');
+        this._router.navigate(['/'])
+      }
+      
+    })
+  }
+  deleteProduct(id) {
+    console.log('id come in', id)
+    this._httpService.deleteProduct(id).subscribe((data:any) => {
+      console.log('get data from django server', data)
+      this.getAllProduct()
     })
   }
 
