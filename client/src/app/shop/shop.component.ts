@@ -3,15 +3,14 @@ import { Router , ActivatedRoute, Params } from '@angular/router'
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HttpService } from '../http.service';
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-shop',
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.css']
 })
-export class HomeComponent implements OnInit {
+export class ShopComponent implements OnInit {
 
-  // allProducts:any =[]
+  allProducts:any =[]
   oneUser:any
   constructor(private _httpService:HttpService,
     private _router: Router,
@@ -19,9 +18,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getOneUser()
-    // this.getAllProduct()
+    this.getAllProduct()
   }
-
   getOneUser() {
     this._httpService.logInUser().subscribe((data:any) => {
       console.log('logInUser', data, data.id);
@@ -32,35 +30,32 @@ export class HomeComponent implements OnInit {
           this.oneUser = data.user[0]
         })
       } else {
-        console.log('error');
-        this._router.navigate(['/'])
+        console.log('asdfaerror');
+        // this._router.navigate(['/'])
       }
     })
   }
-  // getAllProduct() {
-  //   console.log('get all Product')
-  //   this._httpService.allProduct().subscribe((data:any) => {
-  //     console.log('get all product from django server')
-  //     console.log('data from django server', data.products);
-  //     this.allProducts = data.products
-  //   })
-  // }
-
-
-
+  getAllProduct() {
+    console.log('get all Product')
+    this._httpService.allProduct().subscribe((data:any) => {
+      console.log('get all product from django server')
+      console.log('data from django server', data.products);
+      this.allProducts = data.products
+    })
+  }
 
   logOut() {
     this.oneUser = ""
     this._httpService.logOutUser().subscribe((data:any) => {
       console.log(data)
       if(data) {
-        console.log('hello');
-        this._router.navigate(['/'])
-        console.log('another hello');
+        // console.log('hello');
+        // this._router.navigate(['/'])
+        // console.log('another hello');
       }
     })
-    console.log('user logout');
-    this._router.navigate(['/'])
+    // console.log('user logout');
+    // this._router.navigate(['/'])
   }
 
 }

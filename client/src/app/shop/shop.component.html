@@ -1,0 +1,56 @@
+<div class="grid" *ngIf="oneUser; else elseBlock">
+    <a [routerLink]="['/product']" class="admins" *ngIf="oneUser.first_name=='admin'">Product</a>
+    <div class="homes">
+        <a class="welcomeNav1" href="">Cart ( 0 ) </a>
+        <a class="nav-1" [routerLink]="['/shop']">Shop</a>
+        <a class="welcomeNav2" [routerLink]="" >Welcome, {{oneUser.first_name}}</a>
+        <a class="welcomeNav3" [routerLink]="" (click)="logOut()">Log out</a>
+    </div>
+</div>
+<div class="grid">
+    <ng-template #elseBlock>
+        <div class="navs">
+            <a class="nav-1" [routerLink]="['/']">Home</a>
+            <a class="nav-1" [routerLink]="['/shop']">Shop</a>
+            <a class="nav-2" [routerLink]="['/register']">Sign up</a> 
+            <a class="nav-3" [routerLink]="['/login']">Sign in</a>
+        </div>
+    </ng-template>
+</div>
+<div class="main">
+    <aside>
+        <p>Categories</p>
+        <ul>
+            <a [routerLink]="" (click)="makeComputerFilterFunction()">computer</a>
+            <a [routerLink]="" (click)="makeAccessoriesFilterFunction()">accessories</a>
+            <a [routerLink]="" (click)="makeMonitersFilterFunction()">monitors</a>
+        </ul>
+        <form (submit)="onSumbit()" class="form-inline">
+            <div class="form-group">
+                <input type="text" class="form-control col-7" placeholder="Search" required autofocus>
+                <button type="submit">icon</button>
+            </div>
+        </form>
+    </aside>
+    <article>
+            <div class="card" *ngFor="let item of allProducts | paginate:{itemsPerPage: 4, currentPage:p}">
+                <img src="https://cdn.pixabay.com/photo/2018/05/28/22/11/message-in-a-bottle-3437294__340.jpg" class="card-img-top" alt="..." width="100px">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.name}}</h5>
+                    <p class="card-text">{{item.description}}</p>
+                    <p class="card-text"><small class="text-muted">{{item.price}}</small><small class="text-muted">{{item.stock}}</small></p>
+                </div>
+            </div>
+        <pagination-controls class="pagination-style" (pageChange)="p=$event"
+            maxSize="10"
+            directionLinks="true"
+            autoHide="true"
+            responsive="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page"></pagination-controls>
+    </article>
+    <footer>bottom</footer>
+</div>

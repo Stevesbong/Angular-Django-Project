@@ -1,3 +1,22 @@
 input.ng-invalid {
     border: 1px solid red !important;
 }
+.login {
+    background-image: url('../../assets/img/photo3.jpg');
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 12.2em;
+    padding-bottom: 12.2em;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+h1 {
+    text-align: center;
+}
+.fadeInRight {
+    animation-duration: 3.5s;
+}
