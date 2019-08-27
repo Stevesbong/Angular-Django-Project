@@ -1,6 +1,25 @@
+.register {
+    text-align: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    background: url('../../assets/img/photo4.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+h1 {
+    text-align: center;
+    padding:0.2rem;
+}
 form {
     text-align: left;
     margin-top: 2rem;
+    margin: 0 auto;
 }
 button {
     margin:0.3rem;
@@ -73,4 +92,30 @@ small {
 }
 input.ng-invalid, textarea.ng-invalid {
     border: 1px solid red !important;
+}
+@keyframes swing {
+    20% {
+    transform: rotate3d(0, 0, 1, 15deg);
+    }
+
+    40% {
+    transform: rotate3d(0, 0, 1, -10deg);
+    }
+
+    60% {
+    transform: rotate3d(0, 0, 1, 5deg);
+    }
+
+    80% {
+    transform: rotate3d(0, 0, 1, -5deg);
+    }
+
+    to {
+    transform: rotate3d(0, 0, 1, 0deg);
+    }
+}
+
+.swing {
+    transform-origin: top center;
+    animation-name: swing;
 }

@@ -133,3 +133,7 @@ STATICFILES_STORAGE = 'spa.storage.SPAStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STATICFILES_DIR = {
+    os.path.join(BASE_DIR, 'node_modules')
+}

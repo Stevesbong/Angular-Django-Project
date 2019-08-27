@@ -6,11 +6,13 @@ import { HomeComponent } from './home/home.component'
 import { ProductComponent } from './product/product.component'
 import { ProductViewComponent } from './product-view/product-view.component'
 import { ProductEditComponent } from './product-edit/product-edit.component'
+import { ShopComponent } from './shop/shop.component'
 
 
 const routes: Routes = [
   { path: '', redirectTo:'/home', pathMatch:'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'shop', component: ShopComponent },
   { path: 'login', component: LoginFeatureComponent },
   { path: 'register', component: RegisterFeatureComponent },
   { path: 'product', component: ProductComponent },

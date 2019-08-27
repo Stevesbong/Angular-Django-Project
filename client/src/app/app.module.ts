@@ -13,6 +13,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { ProductComponent } from './product/product.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ShopComponent } from './shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     HomeComponent,
     ProductComponent,
     ProductViewComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    ShopComponent
   ],
   imports: [
     BrowserModule,

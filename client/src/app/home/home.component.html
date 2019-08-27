@@ -1,51 +1,77 @@
 <div class="grid" *ngIf="oneUser; else elseBlock">
         <a [routerLink]="['/product']" class="admins" *ngIf="oneUser.first_name=='admin'">Product</a>
-        <div class="homes">
+        <div class="homes navbar-transparent">
             <a class="welcomeNav1" href="">Cart ( 0 ) </a>
+            <a class="nav-1" [routerLink]="['/shop']">Shop</a>
             <a class="welcomeNav2" [routerLink]="" >Welcome, {{oneUser.first_name}}</a>
             <a class="welcomeNav3" [routerLink]="" (click)="logOut()">Log out</a>
         </div>
-    </div>
-    <div class="grid">
-        <ng-template #elseBlock>
-            <div class="navs">
-                <a class="nav-1" [routerLink]="['/']">Home</a>
-                <a class="nav-2" [routerLink]="['/register']">Sign up</a> 
-                <a class="nav-3" [routerLink]="['/login']">Sign in</a>
-            </div>
-        </ng-template>
-    </div>
-<div class="main">
-    <aside>
-        <p>Categories</p>
-        <ul>
-            <a [routerLink]="" (click)="makeComputerFilterFunction()">computer</a>
-            <a [routerLink]="" (click)="makeAccessoriesFilterFunction()">accessories</a>
-            <a [routerLink]="" (click)="makeMonitersFilterFunction()">monitors</a>
-        </ul>
-        <form (submit)="onSumbit()" class="form-inline">
-            <div class="form-group">
-                <input type="text" class="form-control col-7" placeholder="Search" required autofocus>
-                <button type="submit">icon</button>
-            </div>
-        </form>
-    </aside>
-    <article>
-        <ul>
-            <li> Emp Name | Emp code</li>
-            <li *ngFor="let item of allProducts | paginate:{itemsPerPage: 4, currentPage:p}">     
-            {{item.name}} | {{item.description}} | {{item.price}} | {{item.stock}} | {{item.category}}</li> 
-        </ul>
-        <pagination-controls class="pagination-style" (pageChange)="p=$event"
-        maxSize="10"
-        directionLinks="true"
-        autoHide="true"
-        responsive="true"
-        previousLabel="Previous"
-        nextLabel="Next"
-        screenReaderPaginationLabel="Pagination"
-        screenReaderPageLabel="page"
-        screenReaderCurrentLabel="You're on page"></pagination-controls>
-    </article>
-    <footer>bottom</footer>
 </div>
+<div class="grid">
+    <ng-template class="navbar-transparent" #elseBlock>
+        <div class="navs">
+            <a class="nav-1" [routerLink]="['/']">Home</a>
+            <a class="nav-1" [routerLink]="['/shop']">Shop</a>
+            <a class="nav-2" [routerLink]="['/register']">Sign up</a> 
+            <a class="nav-3" [routerLink]="['/login']">Sign in</a>
+        </div>
+    </ng-template>
+</div>
+<div class="main">
+    <div class="in-main">
+        <h1 style='text-align: center'>E-commerce Heading</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim suscipit, laboriosam sint est consequuntur modi ullam fugit molestias impedit dolores reprehenderit eum quam assumenda accusantium ex saepe ratione provident pariatur?</p>
+        <button class="btn btn-primary">Check out Products</button>
+    </div>
+</div>
+<div class="container">
+    <div class="in-container1">
+        <i class="icon-screen-desktop text-primary"></i>
+        <h1>moniter</h1>
+        <p class="lead mb-0">most selling items in this store</p>
+    </div>
+    <div class="in-container2">
+        <i class="icon-mouse text-primary"></i>
+        <h1>mouse</h1>
+        <p class="lead mb-0">most selling items in this store</p>
+    </div>
+    <div class="in-container3">
+        <i class="icon-screen-tablet text-primary"></i>
+        <h1>tablet</h1>
+        <p class="lead mb-1">most selling items in this store</p>
+    </div>
+</div>
+<section class="showcase container-fluid">
+    <div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class='section-img' [ngStyle]="{'background' : 'url(../../assets/img/other5.jpg) no-repeat center center'}">
+        </div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+        <h2>Monitors</h2>
+        <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+        </div>
+    </div>
+
+    <div class="row no-gutters">
+        <div class="col-lg-7 my-auto showcase-text">
+            <h2>Motherboard &amp; CPU</h2>
+            <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 4 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 4!</p>
+        </div>
+        <div class="section-img" [ngStyle]="{'background' : 'url(../../assets/img/other4.jpg) no-repeat center center'}"></div>
+    </div>
+
+    <div class="row no-gutters">
+        <div class="section-img" [ngStyle]="{'background' : 'url(../../assets/img/other2.jpg) no-repeat center center'}">
+        </div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+        <h2>Tablet</h2>
+        <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+        </div>
+    </div>
+    </div>
+</section>
+<footer>
+    <div class="in-footer">
+        <h1>Thanks</h1>
+    </div>
+</footer>

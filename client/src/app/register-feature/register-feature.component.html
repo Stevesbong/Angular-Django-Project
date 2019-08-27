@@ -1,5 +1,6 @@
-<div>
+<div class="register">
     <form (submit)="onSubmit()" class="form-group col-3">
+        <h1 class="animated wobble">Registration</h1>
         <div class="form-label-group">
             <input type="text" name="newUser.first_name" [(ngModel)]="newUser.first_name" required [(ngModel)]="newUser.first_name" #first_name="ngModel" class="form-control" placeholder="First name" required autofocus>
             <small *ngIf="!first_name.valid && !errors.first_name" class="form-text text-muted">* First name is required</small>
@@ -33,5 +34,4 @@
         <button class="btn btn-outline-info">Register</button>
         <button class="btn btn-outline-info" [routerLink]="['/']">Cancel</button>
     </form>
-    <button (click)="getUser()" >test get User</button>
 </div>
