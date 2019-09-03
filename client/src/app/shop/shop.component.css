@@ -1,7 +1,3 @@
-* {
-    margin: 0.3em;
-}
-
 /* nav bar */
 .grid {
     display: grid;
@@ -21,6 +17,9 @@
     color: rgb(162, 176, 212)!important;
     font-size: 1.2rem;
     font-weight: bold;
+}
+div.homes > * {
+    margin:0.3rem;
 }
 div.homes {
     grid-column: 3 / 4;
@@ -68,6 +67,9 @@ a.admins {
 }
 /* admin stuff */
 
+div.navs > * {
+    margin: 0.3rem;
+}
 div.navs {
     grid-area:"div";
     grid-column: 3 / 4;
@@ -140,8 +142,9 @@ footer {
 
 .pagination-style /deep/ .ngx-pagination a {
     text-align: center;
-    color: red!important;
+    color: #51AEC8;
 }
-.card {
-    width: 20em
+
+button {
+    border: 0;
 }
