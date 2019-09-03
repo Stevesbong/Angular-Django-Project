@@ -5,7 +5,6 @@
 /* nav bar */
 .grid {
     display: grid;
-    margin-top:1em;
     grid-gap: 1em;
     grid-template-areas:
     "div"
@@ -72,7 +71,7 @@ a.admins {
 div.navs {
     grid-area:"div";
     grid-column: 3 / 4;
-    padding: 0.2em!important;
+    padding: 1em!important;
     text-align: right;
 }
 .navs a{

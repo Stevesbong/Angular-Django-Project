@@ -12,7 +12,9 @@ import { ShopComponent } from './shop/shop.component'
 const routes: Routes = [
   { path: '', redirectTo:'/home', pathMatch:'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'shop', component: ShopComponent },
+  { path: 'shop', component: ShopComponent, children: [
+    { path: '', },
+  ] },
   { path: 'login', component: LoginFeatureComponent },
   { path: 'register', component: RegisterFeatureComponent },
   { path: 'product', component: ProductComponent },
