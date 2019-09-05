@@ -92,6 +92,10 @@ class ProductsDetail(View):
         product.delete()
         return JsonResponse({'message':"Product delete view Success"})
 
+class ProductsCategory(View):
+    def get(self, request, category):
+        return JsonResponse({'message':"Product category Filter", 'category':list(Product.objects.values().filter(category = category))})
+
 # class Author(models.Model):
 #     name = models.CharField(max_length=255)
 #     created_at = models.DateTimeField(auto_now_add=True)

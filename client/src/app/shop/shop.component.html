@@ -22,17 +22,21 @@
 
     <div class="row">
 
-        <div class="col-lg-3">
+        <div class="col-lg-2">
 
             <h1 class="my-3">Electronic Parts</h1>
+            <div class="list-group">
+                <button class="list-group-item" (click)=getAllProduct() >All</button>
+            </div>
             <div class="list-group" *ngFor="let cate of categorySearch" >
+                <!-- <button class="list-group-item" [routerLink]="['/shop', cate]" >{{cate}}</button>  -->
                 <button class="list-group-item" (click)="categoryQuery(cate)" >{{cate}}</button> 
             </div>
 
         </div>
         <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
+        <div class="col-lg-10">
 
             <!-- <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -60,43 +64,9 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div> -->
-
-            <div class="row">
-
-                <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of allProducts | paginate:{itemsPerPage: 9, currentPage:p}">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">{{item.name}}  </a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Description: {{item.description}}</p>
-                            <!-- <p class="card-text">{{ (item.description.length > 100) ? (item.description | slice:0:100)+'..' : (item.description) }}</p>
-                            <button class="btn btn-outline-info" *ngIf="item.description.length > 100 " (click)="oneDescription(item.id)">Read More</button> -->
-                        
-                        </div>
-                        <div class="card-footer">
-                            <!-- <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small> -->
-                            <button class="btn btn-outline">cart</button>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <!-- /.row -->
-
-            <pagination-controls class="pagination-style" (pageChange)="p=$event"
-                maxSize="10"
-                directionLinks="true"
-                autoHide="true"
-                responsive="true"
-                previousLabel="Previous"
-                nextLabel="Next"
-                screenReaderPaginationLabel="Pagination"
-                screenReaderPageLabel="page"
-                screenReaderCurrentLabel="You're on page"></pagination-controls>
+            
+            <app-shop-product *ngIf="allProducts" [allProducts]="allProducts"></app-shop-product>
+            
         </div>
         <!-- /.col-lg-9 -->
 

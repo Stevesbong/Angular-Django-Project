@@ -43,18 +43,23 @@ export class ShopComponent implements OnInit {
       console.log('get all product from django server')
       console.log('data from django server', data.products);
       this.allProducts = data.products
-
-      for(let i=0; i<data.products.length-1; i++) {
-        if(data.products[i].category != data.products[i+1].category)
-        this.categorySearch.push(data.products[i].category)        
-      }
+      console.log('check', this.categorySearch);
       
+      if(this.categorySearch.length == 0) {
+        for(let i=0; i<data.products.length-1; i++) {
+          if(data.products[i].category != data.products[i+1].category)
+          this.categorySearch.push(data.products[i].category)        
+        }
+      }
     })
   }
   categoryQuery(category) {
     console.log('hello', category);
-    this._router.navigate(['/'+category])
-    
+    this._httpService.categoryFilter(category).subscribe((data:any) => {
+      console.log('steve');
+      console.log('steve works', data.category);
+      this.allProducts = data.category
+    })
   }
   
   

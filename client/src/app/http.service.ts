@@ -41,4 +41,8 @@ export class HttpService {
     console.log('hit getOneProduct Service', id)
     return this._http.get('api/product/' + id)
   }
+  categoryFilter(category) {
+    return this._http.get('api/product/' + category)
+  }
+
 }
