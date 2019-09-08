@@ -1,4 +1,84 @@
-.container-fluid {
+* {
+    margin:0.3em;
+}
+
+/* nav bar */
+.grid {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-areas:
+    "div"
+}
+.grid > div {
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+.grid > * {
+    padding: 0.5em 0.5em;
+    color: rgb(162, 176, 212);
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+/* admin stuff */
+div.admin {
+    grid-area:"div";
+    grid-column: 2 / 3;
+    margin:0.3em;
     text-align: center;
-    margin: 0.25rem;
+    display: inline;
+}
+div.admin a {
+    font-size: 1.2em;
+    color: rgb(162, 176, 212);
+    text-decoration: none;
+}
+/* admin stuff */
+
+
+div.homes, div.homes> *, div.navs, div.navs > * {
+    margin:0.3em;
+    grid-column: 3 / 4;
+    grid-area:"div";
+    font-size: 1.2em;
+    text-align: right;
+    display: inline;
+    color: rgb(162, 176, 212);
+    text-decoration: none;
+}
+.homes a.welcomeNav3:hover {
+    color:red;
+}
+div.navs {
+    grid-area:"div";
+    grid-column: 3 / 4;
+    text-align: right;
+}
+.navs a:hover, .homes a:hover, .admin a:hover {
+    color:#007bff;
+}
+router-outlet {
+    margin:0;
+}
+
+
+footer {
+    margin: 80px auto;
+    font-size:1.5rem;
+}
+p.comment {
+    margin-left:5%;
+}
+i.footer-icon {
+    font-size: 1.5rem;
+    color:#007bff;
+}
+li > a, i.footer-icon {
+    text-decoration: none;
+    color: rgb(162, 176, 212)!important;
+}
+.rollIn {
+    animation-duration: 1.5s;
+    /* animation-delay:2s; */
+    /* animation-iteration-count:2; */
 }

@@ -1,1 +1,50 @@
+<h1 class="animated rollIn" [ngStyle]="{'text-align': 'center'}">Welcome to Steve Electronic Shop</h1>
+<div class="grid" *ngIf="oneUser; else elseBlock">
+    <div class="admin">
+        <a [routerLink]="['/product']" *ngIf="oneUser.first_name=='admin'">Product</a>
+    </div>
+    <div class="homes">
+        <a class="nav-1" [routerLink]="['/']">Home</a>
+        <a class="welcomeNav1" href="" [routerLink]="['/cart']">Cart ( 0 ) </a>
+        <a class="nav-1" [routerLink]="['/shop']">Shop</a>
+        <a class="welcomeNav2" [routerLink]="" >Welcome, {{oneUser.first_name}}</a>
+        <a class="welcomeNav3" [routerLink]="" (click)="logOut()">Log out</a>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <div class="grid">
+        <div class="navs">
+            <a class="nav-1" [routerLink]="['/']">Home</a>
+            <a class="nav-1" [routerLink]="['/shop']">Shop</a>
+            <a class="welcomeNav1" href="" [routerLink]="['/cart']">Cart ( 0 ) </a>
+            <a class="nav-2" [routerLink]="['/register']">Sign up</a> 
+            <a class="nav-3" [routerLink]="['/login']">Sign in</a>
+        </div>
+    </div>
+</ng-template>
+<!-- <app-shop-product *ngIf="allProducts" [allProducts]="allProducts"></app-shop-product> -->
 <router-outlet></router-outlet>
+
+<div class="bottom">
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-right my-auto"></div>
+                <div class="h-100 text-center text-lg-left my-auto">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item">
+                        <a href="mailto:stevepbong@gmail.com"><i class="footer-icon icon-envelope"> stevepbong@gmail.com</i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/Stevesbong/Angular-Django-Project"><i class="footer-icon icon-social-github"> Github</i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.linkedin.com/in/stevespark"><i class="footer-icon icon-social-linkedin"> LinkedIn</i></a>
+                    </li>
+                </ul>
+                <p class="comment text-muted small mb-4 mb-lg-0">&copy; Steve Park E-commerce Website 2019. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

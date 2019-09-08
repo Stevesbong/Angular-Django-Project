@@ -1,0 +1,25 @@
+<div class="container">
+    <h1 class="cart-head" >Your Shopping Cart</h1>
+    <form (submit)="onSubmitCart()">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="first" colspan="2">Product Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td [ngStyle]="{'text-align':'left'}">product name and picture</td>
+                    <td>$ (each price)</td>
+                    <td>quantity - +</td>
+                    <td>$ (total price) </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <div class="checkout">
+        <button>Checkout</button>
+    </div>
+</div>

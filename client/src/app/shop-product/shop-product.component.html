@@ -2,12 +2,16 @@
 
     <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of allProducts | paginate:{itemsPerPage: 9, currentPage:p}">
         <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="" [routerLink]="['/product', item.id]"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
                 <h4 class="card-title">
-                    <a href="#">{{item.name}}  </a>
+                    <a href="" [routerLink]="['/product', item.id]">{{item.name}}  </a>
                 </h4>
-                <h5>$24.99</h5>
+                <h5>{{item.price}}</h5>
+                <h5 *ngIf="item.stock > 5 else elseblock"></h5>
+                <ng-template #elseblock>
+                    <h5 [ngStyle]="{'color': 'red'}">Will be out soon!</h5>
+                </ng-template>
                 <p class="card-text">Description: {{item.description}}</p>
                 <!-- <p class="card-text">{{ (item.description.length > 100) ? (item.description | slice:0:100)+'..' : (item.description) }}</p>
                 <button class="btn btn-outline-info" *ngIf="item.description.length > 100 " (click)="oneDescription(item.id)">Read More</button> -->

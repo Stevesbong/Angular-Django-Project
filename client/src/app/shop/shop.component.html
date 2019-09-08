@@ -1,28 +1,8 @@
-<div class="grid" *ngIf="oneUser; else elseBlock">
-    <a [routerLink]="['/product']" class="admins" *ngIf="oneUser.first_name=='admin'">Product</a>
-    <div class="homes">
-        <a class="welcomeNav1" href="">Cart ( 0 ) </a>
-        <a class="nav-1" [routerLink]="['/shop']">Shop</a>
-        <a class="welcomeNav2" [routerLink]="" >Welcome, {{oneUser.first_name}}</a>
-        <a class="welcomeNav3" [routerLink]="" (click)="logOut()">Log out</a>
-    </div>
-</div>
-<div class="grid">
-    <ng-template #elseBlock>
-        <div class="navs">
-            <a class="nav-1" [routerLink]="['/']">Home</a>
-            <a class="nav-1" [routerLink]="['/shop']">Shop</a>
-            <a class="nav-2" [routerLink]="['/register']">Sign up</a> 
-            <a class="nav-3" [routerLink]="['/login']">Sign in</a>
-        </div>
-    </ng-template>
-</div>
-
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
 
-        <div class="col-lg-2">
+        <div class="col-lg-3">
 
             <h1 class="my-3">Electronic Parts</h1>
             <div class="list-group">
@@ -36,7 +16,7 @@
         </div>
         <!-- /.col-lg-3 -->
 
-        <div class="col-lg-10">
+        <div class="col-lg-9">
 
             <!-- <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
                 <ol class="carousel-indicators">

@@ -1,9 +1,3 @@
-<div class="grid">
-    <div class="navs">
-        <a class="nav-1" [routerLink]="['/']">Home</a>
-        <a class="nav-1" [routerLink]="['/product']">Product List</a>
-    </div>
-</div>
 <div *ngIf="oneProduct" class="container" style="margin: 0 auto;">
     
     <div class="images">
@@ -12,15 +6,15 @@
     <div class="productsDescription">
         <h2>{{oneProduct.name}}</h2>
         <h3>$ {{oneProduct.price}}</h3>
-        <p>Product Quantity: {{oneProduct.stock}}</p>
-        <p *ngIf="oneProduct.stock > 1 else elseblock" > In Stock</p>
+        <p>Product Quantity: {{oneProduct.stock}} delete later</p>
+        <p class="outStock" *ngIf="oneProduct.stock == 0 else elseblock" > Out of Stock</p>
         <ng-template #elseblock>
-           <p class="outStock">Out of Stock</p>
+           <p>In Stock</p>
         </ng-template>
         <p>Product Description: {{oneProduct.description}}</p>
         <form>
-            <button>Add to Cart</button>
-            <button>Buy It now</button>
+            <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-info" >Add to Cart</button>
+            <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-success" >Buy It now</button>
         </form>
     </div>
 </div>

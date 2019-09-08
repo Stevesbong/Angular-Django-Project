@@ -31,7 +31,7 @@
             <small *ngIf="newUser.password != newUser.confirm_password" class="form-text text-muted">* Confirm password have to match with password!</small>
             <label>Confirm Password</label>
         </div>
-        <button class="btn btn-outline-info">Register</button>
-        <button class="btn btn-outline-info" [routerLink]="['/']">Cancel</button>
+        <button class="btn btn-outline-success">Register</button>
+        <button class="btn btn-outline-danger" [routerLink]="['/']">Cancel</button>
     </form>
 </div>

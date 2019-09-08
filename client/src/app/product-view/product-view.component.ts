@@ -28,5 +28,4 @@ export class ProductViewComponent implements OnInit {
       this.oneProduct = data.product[0]
     })
   }
-
 }
