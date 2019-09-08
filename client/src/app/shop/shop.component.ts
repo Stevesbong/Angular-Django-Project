@@ -12,14 +12,14 @@ export class ShopComponent implements OnInit {
 
   allProducts:any =[]
   oneUser:any
-  description:any
   categorySearch:any = []
+
+  // description:any
   constructor(private _httpService:HttpService,
     private _router: Router,
     private _activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
-    this.getOneUser()
     this.getAllProduct()
   }
   getOneUser() {
@@ -32,8 +32,8 @@ export class ShopComponent implements OnInit {
           this.oneUser = data.user[0]
         })
       } else {
-        console.log('asdfaerror');
-        // this._router.navigate(['/'])
+        console.log('error');
+        this._router.navigate(['/'])
       }
     })
   }
@@ -45,12 +45,18 @@ export class ShopComponent implements OnInit {
       this.allProducts = data.products
       console.log('check', this.categorySearch);
       
-      if(this.categorySearch.length == 0) {
-        for(let i=0; i<data.products.length-1; i++) {
-          if(data.products[i].category != data.products[i+1].category)
-          this.categorySearch.push(data.products[i].category)        
+      // if(this.categorySearch.length == 0) {
+      //   for(let i=0; i<data.products.length-1; i++) {
+      //     if(data.products[i].category != data.products[i+1].category)
+      //     this.categorySearch.push(data.products[i].category)
+      //   }
+      // }
+      for(let i = 0; i<data.products.length; i++) {
+        if(!this.categorySearch.hasOwnProperty(data.products[i].category)){
+          this.categorySearch.push(data.products[i].category)
         }
       }
+      this.categorySearch = [...new Set(this.categorySearch)];
     })
   }
   categoryQuery(category) {

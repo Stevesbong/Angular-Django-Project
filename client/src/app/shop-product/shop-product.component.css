@@ -6,3 +6,19 @@
     text-align: center;
     color: #51AEC8;
 }
+footer {
+    /* height: 100px; */
+    margin: 80px auto;
+    font-size:1.5rem;
+}
+p.comment {
+    margin-left:5%;
+}
+i.footer-icon {
+    font-size: 1.5rem;
+    color:#007bff;
+}
+li > a, i.footer-icon {
+    text-decoration: none;
+    color: rgb(162, 176, 212)!important;
+}

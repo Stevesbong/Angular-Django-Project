@@ -8,11 +8,13 @@ import { ProductViewComponent } from './product-view/product-view.component'
 import { ProductEditComponent } from './product-edit/product-edit.component'
 import { ShopComponent } from './shop/shop.component'
 import { ShopProductComponent } from './shop-product/shop-product.component'
+import { CartComponent } from './cart/cart.component'
 
 
 const routes: Routes = [
   { path: '', redirectTo:'/home', pathMatch:'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'cart', component: CartComponent },
   { path: 'shop', component: ShopComponent, children: [
     { path: '', component: ShopProductComponent}
   ] },

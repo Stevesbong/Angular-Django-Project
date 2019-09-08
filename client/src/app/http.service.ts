@@ -33,6 +33,9 @@ export class HttpService {
   createProduct(product) {
     return this._http.post('api/product', product)
   }
+  editProduct(product_id, product) {
+    return this._http.put('api/product/'+ product_id, product)
+  }
   deleteProduct(id) {
     console.log('hit deleteProduct service');
     return this._http.delete('api/product/' + id)

@@ -84,7 +84,8 @@ class ProductsDetail(View):
         product = Product.objects.filter(id = product_id).values()
         return JsonResponse({'message':"Product get view Success", 'product':list(product)})
     def put(self, request, product_id):
-        print('came in put detail view')
+        body = json.loads(request.body.decode())
+        Product.objects.filter(id = product_id).values().update(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
         return JsonResponse({'message':"Product put view Success"})
     def delete(self, request, product_id):
         print('came in delete detail view', product_id)
