@@ -33,15 +33,11 @@ export class LoginFeatureComponent implements OnInit {
         // later navigate it to success page
         // console.log('login component', data.user[0].id);
         // this._router.navigate(['/home', data.user[0].id])
-        this._router.navigate(['/home'])
+        this._router.navigate(['/'])
       } else {
         this.errors = data.errors
       }
     })
   }
-  goHome() {
-    this._router.navigate(['/'])
-  }
-
   
 }

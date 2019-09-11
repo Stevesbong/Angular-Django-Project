@@ -11,8 +11,9 @@ import { HttpService } from '../http.service';
 export class ShopComponent implements OnInit {
 
   allProducts:any =[]
-  oneUser:any
+  // oneUser:any
   categorySearch:any = []
+  user:any
 
   // description:any
   constructor(private _httpService:HttpService,
@@ -21,29 +22,34 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.getAllProduct()
+    // this._httpService.user.subscribe(c => {
+    //   this.user = c
+    // })
+    // console.log('testing behavior', this.user);
+    
   }
-  getOneUser() {
-    this._httpService.logInUser().subscribe((data:any) => {
-      console.log('logInUser', data, data.id);
-      if(data.id){
-        console.log('check id', data.id);
-        this._httpService.loggedInUser(data.id).subscribe((data:any) => {
-          console.log('data from loggedInUser', data.user[0]);
-          this.oneUser = data.user[0]
-        })
-      } else {
-        console.log('error');
-        this._router.navigate(['/'])
-      }
-    })
-  }
+  // getOneUser() {
+  //   this._httpService.logInUser().subscribe((data:any) => {
+  //     console.log('logInUser', data, data.id);
+  //     if(data.id){
+  //       console.log('check id', data.id);
+  //       this._httpService.loggedInUser(data.id).subscribe((data:any) => {
+  //         console.log('data from loggedInUser', data.user[0]);
+  //         this.oneUser = data.user[0]
+  //       })
+  //     } else {
+  //       console.log('error');
+  //       this._router.navigate(['/'])
+  //     }
+  //   })
+  // }
   getAllProduct() {
-    console.log('get all Product')
+    // console.log('get all Product')
     this._httpService.allProduct().subscribe((data:any) => {
-      console.log('get all product from django server')
-      console.log('data from django server', data.products);
+      // console.log('get all product from django server')
+      // console.log('data from django server', data.products);
       this.allProducts = data.products
-      console.log('check', this.categorySearch);
+      // console.log('check', this.categorySearch);
       
       // if(this.categorySearch.length == 0) {
       //   for(let i=0; i<data.products.length-1; i++) {
@@ -60,29 +66,29 @@ export class ShopComponent implements OnInit {
     })
   }
   categoryQuery(category) {
-    console.log('hello', category);
+    // console.log('hello', category);
     this._httpService.categoryFilter(category).subscribe((data:any) => {
-      console.log('steve');
-      console.log('steve works', data.category);
+      // console.log('steve');
+      // console.log('steve works', data.category);
       this.allProducts = data.category
     })
   }
   
   
   
-  logOut() {
-    this.oneUser = ""
-    this._httpService.logOutUser().subscribe((data:any) => {
-      console.log(data)
-      if(data) {
-        // console.log('hello');
-        // this._router.navigate(['/'])
-        // console.log('another hello');
-      }
-    })
-    // console.log('user logout');
-    // this._router.navigate(['/'])
-  }
+  // logOut() {
+  //   this.oneUser = ""
+  //   this._httpService.logOutUser().subscribe((data:any) => {
+  //     console.log(data)
+  //     if(data) {
+  //       // console.log('hello');
+  //       // this._router.navigate(['/'])
+  //       // console.log('another hello');
+  //     }
+  //   })
+  //   // console.log('user logout');
+  //   // this._router.navigate(['/'])
+  // }
   
 }
 // oneDescription(index) {

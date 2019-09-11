@@ -1,0 +1,6 @@
+.pagination-style /deep/ .ngx-pagination {
+    text-align: center;
+}
+.pagination-style /deep/ .ngx-pagination a {
+    color: #51AEC8;
+}

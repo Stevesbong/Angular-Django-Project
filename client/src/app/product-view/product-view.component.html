@@ -1,20 +1,29 @@
-<div *ngIf="oneProduct" class="container" style="margin: 0 auto;">
-    
-    <div class="images">
-        <img src="https://cdn.pixabay.com/photo/2018/05/28/22/11/message-in-a-bottle-3437294__340.jpg" style="margin: 50px"alt="">
-    </div>
-    <div class="productsDescription">
-        <h2>{{oneProduct.name}}</h2>
-        <h3>$ {{oneProduct.price}}</h3>
-        <p>Product Quantity: {{oneProduct.stock}} delete later</p>
-        <p class="outStock" *ngIf="oneProduct.stock == 0 else elseblock" > Out of Stock</p>
-        <ng-template #elseblock>
-           <p>In Stock</p>
-        </ng-template>
-        <p>Product Description: {{oneProduct.description}}</p>
-        <form>
-            <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-info" >Add to Cart</button>
-            <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-success" >Buy It now</button>
-        </form>
+<div *ngIf="oneProduct" class="container-fluid">
+    <div class="row">
+        <div class="col-5 images">
+            <img src="https://cdn.pixabay.com/photo/2018/05/28/22/11/message-in-a-bottle-3437294__340.jpg" alt="">
+        </div>
+        <div class="col-7 productsDescription">
+            <div>
+                <h2>{{oneProduct.name}}</h2>
+                <h3>$ {{oneProduct.price}}</h3>
+                <p>Product Quantity: {{oneProduct.stock}} (delete later)</p>
+                <p class="outStock" *ngIf="oneProduct.stock == 0 else elseblock" > Out of Stock</p>
+                <ng-template #elseblock>
+                   <p>In Stock</p>
+                </ng-template>
+                <p [ngStyle]="{'word-wrap': 'break-word'}">Product Description: {{oneProduct.description}}</p>
+                <form>
+                    <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-info" (click)="productToCart()" >Add to Cart</button>
+                    <!-- <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-info" (click)="productToCart(oneProduct.id)" >Add to Cart</button> -->
+                    <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-success">Buy It now</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+
+<p>
+    todo: in cart component emit delete cart button to app.component
+    todo: in view component emit delete cart button to app.component
+</p>
