@@ -1,6 +1,6 @@
 <div class="container">
     <h1 class="cart-head" >Your Shopping Cart</h1>
-    <form (submit)="onSubmitCart()">
+    <form (submit)="onSubmitCart()" *ngIf="allProducts?.length > 0; else elseBlock">
         <table class="table">
             <thead>
                 <tr>
@@ -10,9 +10,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td [ngStyle]="{'text-align':'left'}">product name and picture</td>
-                    <td>$ (each price)</td>
+                <tr *ngFor="let product of allProducts">
+                    <td [ngStyle]="{'text-align':'left'}">( {{product.name}} )</td>
+                    <td>$ {{product.price}}</td>
                     <td>quantity - +</td>
                     <td>$ (total price) </td>
                 </tr>
@@ -21,5 +21,12 @@
     </form>
     <div class="checkout">
         <button>Checkout</button>
+        <button (click)="deleteCart()" >Delete Cart</button>
     </div>
 </div>
+<ng-template #elseBlock>
+    <div class="emptyCart">
+        <h4>You don't have any items in your cart yet. <a href="" [routerLink]="['/shop']"> Continue shopping.</a></h4>
+        
+    </div>
+</ng-template>

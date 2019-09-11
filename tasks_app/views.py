@@ -28,6 +28,8 @@ class Users(View):
             print(hashpw.decode())
             user = User.objects.create(first_name = body['first_name'], last_name = body['last_name'], email = body['email'], password = hashpw.decode())
             return JsonResponse({'message':'Success'})
+
+
 class OneUser(View):
     def get(self, req):
         print('hitting here?')
@@ -50,18 +52,22 @@ class OneUser(View):
             req.session['logged_in'] = True
             req.session['user_id'] = user[0]['id']
             return JsonResponse({'message':"find", 'user':list(user)})
+
+
 class UserDetail(View):
     def get(self, request, user_id):
         user = User.objects.filter(id = user_id).values()        
         return JsonResponse({'message':"Success", 'user':list(user)})
+
     def put(self, request):
         return JsonResponse({'message':"Success"})
+
+
 class UserLogOut(View):
     def get(self, request):
         del request.session['logged_in']
         del request.session['user_id']
         return JsonResponse({'message':"User Logged Out"})
-
 
 
 class Products(View):
@@ -78,24 +84,54 @@ class Products(View):
         product = Product.objects.create(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
         return JsonResponse({'message':"product post Success"})
 
+
 class ProductsDetail(View):
     def get(self, request, product_id):
         print('came in get detail view', product_id)
         product = Product.objects.filter(id = product_id).values()
         return JsonResponse({'message':"Product get view Success", 'product':list(product)})
+
     def put(self, request, product_id):
         body = json.loads(request.body.decode())
         Product.objects.filter(id = product_id).values().update(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
         return JsonResponse({'message':"Product put view Success"})
+
     def delete(self, request, product_id):
         print('came in delete detail view', product_id)
         product = Product.objects.get(id = product_id)
         product.delete()
         return JsonResponse({'message':"Product delete view Success"})
 
+
 class ProductsCategory(View):
     def get(self, request, category):
         return JsonResponse({'message':"Product category Filter", 'category':list(Product.objects.values().filter(category = category))})
+
+
+class Cart(View):
+    def get(self, request):
+        if 'cart' not in request.session:
+            request.session['cart'] = []
+        print('printing', len(request.session['cart']))
+        if(len(request.session['cart']) < 1):
+            return JsonResponse({'message':"Cart"})
+        else:
+            return JsonResponse({'message':"Cart", 'cart':request.session['cart']})
+
+    def post(self, request):
+        print('4')
+        body = json.loads(request.body.decode())
+        print('5',body)
+        cart = request.session['cart']
+        cart.append(body)
+        request.session['cart'] = cart
+        # request.session['cart'].append(body)
+        print('\n\n session', request.session['cart'])
+        return JsonResponse({'message':"Cart post", 'cart':request.session['cart']})
+
+    def delete(self, request):
+        del request.session['cart']
+        return JsonResponse({'message':"Cart Out"})
 
 # class Author(models.Model):
 #     name = models.CharField(max_length=255)
