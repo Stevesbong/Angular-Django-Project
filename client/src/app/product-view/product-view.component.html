@@ -17,6 +17,7 @@
                     <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-info" (click)="productToCart()" >Add to Cart</button>
                     <!-- <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-info" (click)="productToCart(oneProduct.id)" >Add to Cart</button> -->
                     <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-success">Buy It now</button>
+                    <button class="btn btn-outline-dark" *ngIf="oneUser && oneUser.first_name=='admin'" [routerLink]="['edit']" >Edit</button>
                 </form>
             </div>
         </div>

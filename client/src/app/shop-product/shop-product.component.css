@@ -22,3 +22,13 @@ li > a, i.footer-icon {
     text-decoration: none;
     color: rgb(162, 176, 212)!important;
 }
+button:focus {
+    box-shadow: none
+}
+button.btn {
+    color:green;
+}
+.btn.disabled, .btn:disabled {
+    color:black!important;
+    text-decoration-line: line-through;
+}

@@ -12,6 +12,9 @@ export class ProductViewComponent implements OnInit {
 
   oneProduct:any
   products:any
+
+  oneUser:any
+
   constructor(private _httpService: HttpService,
     private _activatedRoute:ActivatedRoute,
     private _router:Router) { }
@@ -19,10 +22,18 @@ export class ProductViewComponent implements OnInit {
   ngOnInit() {
     // console.log('hello?')
     this._activatedRoute.params.subscribe((params:Params) => {
-      // console.log('params', params.id)
+      console.log('params', params.id)
       this.getProductDetail(params.id)
     })
-    
+    this._httpService.userInfo.subscribe((data:any) => {
+      this.oneUser = data.user
+      // console.log('user', data);
+      // console.log('user2', this.oneUser);
+      // console.log('user3', this.oneUser.first_name);
+      
+      
+      
+    })
 
   }
   getProductDetail(id) {
@@ -35,6 +46,7 @@ export class ProductViewComponent implements OnInit {
 
   productToCart() {
     this._httpService.addCart(this.oneProduct)
+    // this._httpService.cartLength.next(1)
   }
 
 

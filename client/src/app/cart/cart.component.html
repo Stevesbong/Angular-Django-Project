@@ -11,7 +11,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let product of allProducts">
-                    <td [ngStyle]="{'text-align':'left'}">( {{product.name}} )</td>
+                    <td [ngStyle]="{'text-align':'left'}">{{product.name}}</td>
                     <td>$ {{product.price}}</td>
                     <td>quantity - +</td>
                     <td>$ (total price) </td>
@@ -20,8 +20,8 @@
         </table>
     </form>
     <div class="checkout">
-        <button>Checkout</button>
-        <button (click)="deleteCart()" >Delete Cart</button>
+        <button class="btn btn-outline-danger btn-lg" (click)="deleteCart()" >Delete Cart</button>
+        <button class="btn btn-outline-info btn-lg" >Checkout</button>
     </div>
 </div>
 <ng-template #elseBlock>

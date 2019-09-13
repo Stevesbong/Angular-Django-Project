@@ -96,3 +96,12 @@ li > a, i.footer-icon {
     animation-duration: 3.5s;
     animation-iteration-count: infinite;
 }
+.animatedhover {
+    animation-duration: 1.5s;
+    animation-play-state: paused
+}
+.animatedhover:hover {
+    animation-duration: 1.5s;
+    animation-play-state: running;
+}
+

@@ -13,13 +13,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let p of allProducts | paginate:{itemsPerPage: 10, currentPage:p}">
+            <tr *ngFor="let p of allProducts | paginate:{itemsPerPage: 8, currentPage:p}">
                 <td>{{p.name}}</td>
                 <td class="b">{{ (p.description.length > 20) ? (p.description | slice:0:20) + '  ...' : (p.description) }}</td>
                 <td>{{p.price}}</td>
                 <td>{{p.stock}}</td>
                 <td>{{p.category}}</td>
-                <td><button class="btn btn-outline-primary" [routerLink]="['/product', p.id]">View</button> | <button class="btn btn-outline-info" [routerLink]="['/product', 'edit', p.id]">Edit</button> | <button (click)="deleteProduct(p.id)" class="btn btn-outline-danger" >Delete</button></td>
+                <td><button class="btn btn-outline-primary" [routerLink]="['/product', p.id]">View</button> | <button class="btn btn-outline-info" [routerLink]="['/product',p.id, 'edit']">Edit</button> | <button (click)="deleteProduct(p.id)" class="btn btn-outline-danger" >Delete</button></td>
             </tr>
         </tbody>
     </table>

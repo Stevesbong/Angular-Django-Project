@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterFeatureComponent },
   { path: 'product', component: ProductComponent },
   { path: 'product/:id', component: ProductViewComponent },
-  { path: 'product/edit/:id', component: ProductEditComponent}
+  { path: 'product/:id/edit', component: ProductEditComponent}
 ];
 
 @NgModule({
