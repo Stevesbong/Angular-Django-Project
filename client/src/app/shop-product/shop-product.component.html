@@ -11,15 +11,18 @@
                     <!-- <p class="card-text">Description: {{item.description}}</p> -->
                     <p class="card-text">{{ (item.description.length > 100) ? (item.description | slice:0:100)+'..' : (item.description) }}</p>
                     <!-- <button class="btn btn-outline-info" *ngIf="item.description.length > 100 " (click)="oneDescription(item.id)">Read More</button> -->
-                    <h5 *ngIf="item.stock > 5 else elseblock"></h5>
-                    <ng-template #elseblock>
+                    <h5 [ngStyle]="{'color': 'red'}" *ngIf="item.stock == 0; else outOfStock">Out Of order!</h5>
+                    <ng-template #outOfStock>
+                        <h5 [ngStyle]="{'color': 'red'}" *ngIf="item.stock > 5; else lessThanFive"></h5>
+                    </ng-template>
+                    <ng-template #lessThanFive>
                         <h5 [ngStyle]="{'color': 'red'}">Will be out soon!</h5>
                     </ng-template>
                 
                 </div>
                 <div class="card-footer">
                     <!-- <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small> -->
-                    <button class="btn btn-outline">Add to Cart</button>
+                    <button class="btn btn-outline-link" [disabled]="item.stock == 0" (click)="productToCart(item)">Add to Cart</button>
                 </div>
             </div>
         </div>

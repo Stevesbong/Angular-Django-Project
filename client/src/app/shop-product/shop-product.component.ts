@@ -13,5 +13,8 @@ export class ShopProductComponent implements OnInit {
 
   ngOnInit() {
   }
+  productToCart(product) {
+    this._httpService.addCart(product)
+  }
 
 }

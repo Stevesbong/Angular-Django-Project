@@ -24,15 +24,17 @@ export class LoginFeatureComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log('first consololog', this.loginUser);
+    // console.log('first consololog', this.loginUser);
     
     this._httpService.findUser(this.loginUser).subscribe((data:any)=> {
-      console.log('from backend', data)
+      // console.log('from backend', data.user[0])
       if(!data.hasOwnProperty('errors')) {
+        this._httpService.userInfo.next(data)
         // temporary navigate.
         // later navigate it to success page
         // console.log('login component', data.user[0].id);
         // this._router.navigate(['/home', data.user[0].id])
+        // this._httpService.logInUser()
         this._router.navigate(['/'])
       } else {
         this.errors = data.errors

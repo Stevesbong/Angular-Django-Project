@@ -1,25 +1,25 @@
-<h1 class="animated rollIn" [ngStyle]="{'text-align': 'center'}">Welcome to Steve Electronic Shop</h1>
+<h1 class="tracking-in-contract" [ngStyle]="{'text-align': 'center'}">Welcome to Steve Electronic Shop</h1>
 <div class="grid" *ngIf="oneUser; else elseBlock">
     <div class="admin">
         <a [routerLink]="['/product']" *ngIf="oneUser.first_name=='admin'">Product</a>
     </div>
     <div class="homes">
-        <a class="nav-1" [routerLink]="['/']">Home</a>
-        <a class="nav-1" [routerLink]="['/shop']">Shop</a>
-        <a class="welcomeNav1" href="" [routerLink]="['/cart']">Cart ( {{cartItem}} ) </a>
+        <a class="nav-1 animatedhover flash" [routerLink]="['/']">Home</a>
+        <a class="nav-1 animatedhover flash" [routerLink]="['/shop']">Shop</a>
+        <a class="welcomeNav1 animatedhover flash" href="" [routerLink]="['/cart']">Cart ( {{cartItem}} ) </a>
                                                                     <!--  ^^ it used to cartItem.length -->
-        <a class="welcomeNav2" [routerLink]="" >Welcome, {{oneUser.first_name}}</a>
-        <a class="welcomeNav3" [routerLink]="" (click)="logOut()">Log out</a>
+        <a class="welcomeNav2 animatedhover flash" [routerLink]="" *ngIf="oneUser">Welcome, {{oneUser.first_name}}</a>
+        <a class="welcomeNav3 animatedhover flash" [routerLink]="" (click)="logOut()" *ngIf="oneUser">Log out</a>
     </div>
 </div>
 <ng-template #elseBlock>
     <div class="grid">
         <div class="navs">
-            <a class="nav-1" [routerLink]="['/']">Home</a>
-            <a class="nav-1" [routerLink]="['/shop']">Shop</a>
-            <a class="welcomeNav1" href="" [routerLink]="['/cart']">Cart ( {{cartItem}} ) </a>
-            <a class="nav-1" [routerLink]="['/register']">Sign up</a> 
-            <a class="nav-1" [routerLink]="['/login']">Sign in</a>
+            <a class="nav-1 animatedhover flash" [routerLink]="['/']">Home</a>
+            <a class="nav-1 animatedhover flash" [routerLink]="['/shop']">Shop</a>
+            <a class="welcomeNav1 animatedhover flash" href="" [routerLink]="['/cart']">Cart ( {{cartItem}} ) </a>
+            <a class="nav-1 animatedhover flash" [routerLink]="['/register']">Sign up</a> 
+            <a class="nav-1 animatedhover flash" [routerLink]="['/login']">Sign in</a>
         </div>
     </div>
 </ng-template>
@@ -29,8 +29,8 @@
 <footer class="footer">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6 h-100 text-center text-lg-right my-auto"></div>
-            <div class="h-100 text-center text-lg-left my-auto">
+            <div class="col-lg-6 h-100 text-center my-auto"></div>
+            <div class="right h-100 text-center text-lg-left my-auto">
             <ul class="list-inline mb-2">
                 <li class="list-inline-item">
                     <a href="mailto:stevepbong@gmail.com"><i class="footer-icon icon-envelope"><small> stevepbong@gmail.com</small></i></a>

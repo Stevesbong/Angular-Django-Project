@@ -35,7 +35,9 @@ class OneUser(View):
         print('hitting here?')
         if 'user_id' in req.session:
             print('here?')
-            return JsonResponse({'message':"oneUser", 'id':req.session['user_id']})
+            user = req.session['user_id']
+            req.session['user_id'] = user
+            return JsonResponse({'message':"oneUser", 'user':user})
         return JsonResponse({'message':"error occur"})
 
     def post(self, req):
@@ -47,20 +49,21 @@ class OneUser(View):
         if len(errors) > 0:
             return JsonResponse({'message': 'Error', 'errors':errors})
         else:
-            user = User.objects.filter(email = body['email']).values()
-            print('print user post', user[0])
+            user = User.objects.filter(email = body['email']).values().first()
+            print('print user post', user)
             req.session['logged_in'] = True
-            req.session['user_id'] = user[0]['id']
-            return JsonResponse({'message':"find", 'user':list(user)})
+            req.session['user_id'] = user
+            # userss = json.loads(user)
+            return JsonResponse({'message':"find", 'user':req.session['user_id']})
 
 
-class UserDetail(View):
-    def get(self, request, user_id):
-        user = User.objects.filter(id = user_id).values()        
-        return JsonResponse({'message':"Success", 'user':list(user)})
+# class UserDetail(View):
+#     def get(self, request, user_id):
+#         user = User.objects.filter(id = user_id).values()
+#         return JsonResponse({'message':"Success", 'user':list(user)})
 
-    def put(self, request):
-        return JsonResponse({'message':"Success"})
+#     def put(self, request):
+#         return JsonResponse({'message':"Success"})
 
 
 class UserLogOut(View):

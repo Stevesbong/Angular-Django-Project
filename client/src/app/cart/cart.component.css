@@ -14,3 +14,12 @@ h4 {
     padding:2em;
     margin:2em;
 }
+.container {
+    margin-bottom: 20em;
+}
+div.checkout {
+    text-align: right;
+}
+div.checkout button {
+    margin:0.8em
+}
