@@ -6,23 +6,26 @@
                 <tr>
                     <th class="first" colspan="2">Product Price</th>
                     <th>Quantity</th>
-                    <th>Total</th>
+                    <th>Sub Total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let product of allProducts">
                     <td [ngStyle]="{'text-align':'left'}">{{product.name}}</td>
                     <td>$ {{product.price}}</td>
-                    <td>quantity - +</td>
-                    <td>$ (total price) </td>
+                    <td>{{product.quantity}}</td>
+                    <td>$ {{product.price * product.quantity | number : '1.2-2'}} </td>
+                </tr>
+                <tr>
+                    <td colspan="4" [ngStyle]="{'text-align':'right'}">total : ${{totalPrice | number : '1.2-2'}}</td>
                 </tr>
             </tbody>
         </table>
+        <div class="checkout">
+            <button type="button" class="btn btn-outline-danger btn-lg" (click)="deleteCart()" >Delete Cart</button>
+            <button type="submit" class="btn btn-outline-info btn-lg">Checkout</button>
+        </div>
     </form>
-    <div class="checkout">
-        <button class="btn btn-outline-danger btn-lg" (click)="deleteCart()" >Delete Cart</button>
-        <button class="btn btn-outline-info btn-lg" >Checkout</button>
-    </div>
 </div>
 <ng-template #elseBlock>
     <div class="emptyCart">

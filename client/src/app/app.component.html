@@ -8,8 +8,8 @@
         <a class="nav-1 animatedhover flash" [routerLink]="['/shop']">Shop</a>
         <a class="welcomeNav1 animatedhover flash" href="" [routerLink]="['/cart']">Cart ( {{cartItem}} ) </a>
                                                                     <!--  ^^ it used to cartItem.length -->
-        <a class="welcomeNav2 animatedhover flash" [routerLink]="" *ngIf="oneUser">Welcome, {{oneUser.first_name}}</a>
-        <a class="welcomeNav3 animatedhover flash" [routerLink]="" (click)="logOut()" *ngIf="oneUser">Log out</a>
+        <a class="welcomeNav2 animatedhover flash" [routerLink]="['/order']" *ngIf="oneUser">Welcome, {{oneUser.first_name}}</a>
+        <a class="welcomeNav3 animatedhover flash" (click)="logOut()" *ngIf="oneUser">Log out</a>
     </div>
 </div>
 <ng-template #elseBlock>

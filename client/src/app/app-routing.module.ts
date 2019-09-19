@@ -9,6 +9,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component'
 import { ShopComponent } from './shop/shop.component'
 import { ShopProductComponent } from './shop-product/shop-product.component'
 import { CartComponent } from './cart/cart.component'
+import { OrderComponent } from './order/order.component'
 
 
 const routes: Routes = [
@@ -22,7 +23,10 @@ const routes: Routes = [
   { path: 'register', component: RegisterFeatureComponent },
   { path: 'product', component: ProductComponent },
   { path: 'product/:id', component: ProductViewComponent },
-  { path: 'product/:id/edit', component: ProductEditComponent}
+  { path: 'product/:id/edit', component: ProductEditComponent},
+  
+  { path: 'order', component: OrderComponent },
+  { path: '**', redirectTo: '/home'},
 ];
 
 @NgModule({
