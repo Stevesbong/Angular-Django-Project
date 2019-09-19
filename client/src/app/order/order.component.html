@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h1 class="cart-head" >Order Summary</h1>
+            <form (submit)="onSubmitCart()" *ngIf="allProducts?.length > 0; else elseBlock">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="first" colspan="2">Product Price</th>
+                            <th>Quantity</th>
+                            <th>Sub Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of allProducts">
+                            <td [ngStyle]="{'text-align':'left'}">{{product.name}}</td>
+                            <td>$ {{product.price}}</td>
+                            <td>{{product.quantity}}</td>
+                            <td>$ {{product.price * product.quantity | number : '1.2-2'}} </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" [ngStyle]="{'text-align':'right'}">tax: ${{totalPrice.subTotal | number : '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" [ngStyle]="{'text-align':'right', 'border-top':'none'}">total: ${{totalPrice.total | number : '1.2-2'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="orderProcess">
+                <button type="submit" class="btn btn-outline-info btn-lg">Submit</button>
+                <button type="button" class="btn btn-outline-danger btn-lg" (click)="deleteOrder()">Cancel</button>
+            </div>
+        </div>
+        <ng-template #elseBlock>
+                <div class="emptyCart">
+                    <h4>You don't have any items in your order yet. <a href="" [routerLink]="['/shop']"> Continue shopping.</a></h4>
+                </div>
+            </ng-template>
+            
+        <div class="col-1"></div>
+
+
+        <div class="col-5">
+            <div class="shipping">
+                <h2>Billing Information</h2>
+                <form class="form-group" action="#" method="post">
+                    <div class="form-label-group">
+                        <input name="fname" class="form-control sm-3" type="text" placeholder="First Name" required autofocus>
+                        <small class="form-text text-muted">first_name validation</small>
+                        <label for="inputEmail">First Name</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input name="lname" class="form-control sm-3" type="text" placeholder="Last Name" required autofocus>
+                        <small class="form-text text-muted">last_name validation</small>
+                        <label for="inputEmail">last Name</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input name="address" class="form-control sm-3" type="text" placeholder="Address" required autofocus>
+                        <small class="form-text text-muted">address validation</small>
+                        <label for="inputEmail">Address</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input name="address2" class="form-control sm-3" type="text" placeholder="Address 2" required autofocus>
+                        <small class="form-text text-muted">address2 validation</small>
+                        <label for="inputEmail">Address 2</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input name="city" class="form-control sm-3" type="text" placeholder="City" required autofocus>
+                        <small class="form-text text-muted">city validation</small>
+                        <label for="inputEmail">City</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input name="state" class="form-control sm-3" type="text" placeholder="State" required autofocus>
+                        <small class="form-text text-muted">state validation</small>
+                        <label for="inputEmail">State</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input name="zipcode" class="form-control sm-3" type="text" placeholder="Zipcode" required autofocus>
+                        <small class="form-text text-muted">zipcode validation</small>
+                        <label for="inputEmail">Zipcode</label>
+                    </div>
+                    <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="Same for billing">Same as shipping
+                    </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

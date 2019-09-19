@@ -16,6 +16,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ShopComponent } from './shop/shop.component';
 import { ShopProductComponent } from './shop-product/shop-product.component';
 import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CartComponent } from './cart/cart.component';
     ShopComponent,
     ShopProductComponent,
     CartComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

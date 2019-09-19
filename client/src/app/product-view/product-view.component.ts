@@ -22,7 +22,7 @@ export class ProductViewComponent implements OnInit {
   ngOnInit() {
     // console.log('hello?')
     this._activatedRoute.params.subscribe((params:Params) => {
-      console.log('params', params.id)
+      // console.log('params', params.id)
       this.getProductDetail(params.id)
     })
     this._httpService.userInfo.subscribe((data:any) => {
@@ -44,21 +44,8 @@ export class ProductViewComponent implements OnInit {
     })
   }
 
-  productToCart() {
-    this._httpService.addCart(this.oneProduct)
+  productToCart(product) {
+    this._httpService.addCart(product)
     // this._httpService.cartLength.next(1)
   }
-
-
-
-
-  // productToCart(id) {
-  //   this._httpService.getOneProduct(id).subscribe((data:any) => {
-  //     console.log('1');
-      
-  //     // console.log('productTocart', data.product);
-  //     this._httpService.getNextProduct(data.product[0])
-  //   })
-    
-  // }
 }

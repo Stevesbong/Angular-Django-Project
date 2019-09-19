@@ -13,7 +13,7 @@ export class HttpService {
   public productInfo = new BehaviorSubject<object>({})
   public userInfo = new BehaviorSubject<object>({})
 
-  // currentProduct = this.productInfo.asObservable();
+  currentProduct = this.productInfo.asObservable();
 
   constructor(private _http: HttpClient) {
     // this.productInfo.subscribe(console.log)
@@ -28,15 +28,30 @@ export class HttpService {
   //   this.productInfo.next(products)
   // }
 
+  orderProcess(order) {
+    console.log('hi?');
+    
+    return this._http.post('api/order', order)
+  }
+  getUserOrder() {
+    // make this one also like add Cart with behaviorSubject
+    return this._http.get('api/order')
+  }
+  deleteOrder() {
+    return this._http.delete('api/order')
+  }
 
   cart() {
+    this._http.get('api/cart').subscribe(data => {
+      this.productInfo.next(data)
+    })
     return this._http.get('api/cart')
   }
   addCart(product) {
     this._http.post('api/cart', product).subscribe(data => {
       console.log('service cart check',data['cart'].length);
       this.cartLength.next(data['cart'].length)
-      this.productInfo.next(data['cart'])
+      // this.productInfo.next(data)
     })
   }
   deleteCart() {
@@ -52,9 +67,9 @@ export class HttpService {
   }
   findUser(user) {
     // console.log('service', user);
-    this._http.post('api/tasks/user', user).subscribe((data:any) => {
-      this.userInfo.next(data)
-    })
+    // this._http.post('api/tasks/user', user).subscribe((data:any) => {
+      // this.userInfo.next(data)
+    // })
     return this._http.post('api/tasks/user', user)
   }
   logInUser() {

@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.views import View
 from django.contrib import messages
 import json, bcrypt
-from .models import User, UserManager, Product
+from .models import User, UserManager, Product, Order
 
 # Create your views here.
 
@@ -32,11 +32,11 @@ class Users(View):
 
 class OneUser(View):
     def get(self, req):
-        print('hitting here?')
+        # print('hitting here?')
         if 'user_id' in req.session:
-            print('here?')
+            # print('here?')
             user = req.session['user_id']
-            req.session['user_id'] = user
+            # req.session['user_id'] = user
             return JsonResponse({'message':"oneUser", 'user':user})
         return JsonResponse({'message':"error occur"})
 
@@ -53,6 +53,7 @@ class OneUser(View):
             print('print user post', user)
             req.session['logged_in'] = True
             req.session['user_id'] = user
+            req.session['cart'] = []
             # userss = json.loads(user)
             return JsonResponse({'message':"find", 'user':req.session['user_id']})
 
@@ -75,7 +76,7 @@ class UserLogOut(View):
 
 class Products(View):
     def get(self, request):
-        print('came in get view')
+        # print('came in get view')
         access = True
         if 'logged_in' not in request.session:
             access = False
@@ -83,14 +84,14 @@ class Products(View):
 
     def post(self, request):
         body = json.loads(request.body.decode())
-        print('came in post view', type(body), body)
+        # print('came in post view', type(body), body)
         product = Product.objects.create(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
         return JsonResponse({'message':"product post Success"})
 
 
 class ProductsDetail(View):
     def get(self, request, product_id):
-        print('came in get detail view', product_id)
+        # print('came in get detail view', product_id)
         product = Product.objects.filter(id = product_id).values()
         return JsonResponse({'message':"Product get view Success", 'product':list(product)})
 
@@ -100,7 +101,7 @@ class ProductsDetail(View):
         return JsonResponse({'message':"Product put view Success"})
 
     def delete(self, request, product_id):
-        print('came in delete detail view', product_id)
+        # print('came in delete detail view', product_id)
         product = Product.objects.get(id = product_id)
         product.delete()
         return JsonResponse({'message':"Product delete view Success"})
@@ -115,7 +116,7 @@ class Cart(View):
     def get(self, request):
         if 'cart' not in request.session:
             request.session['cart'] = []
-        print('printing', len(request.session['cart']))
+        # print('printing', len(request.session['cart']))
         if(len(request.session['cart']) < 1):
             return JsonResponse({'message':"Cart"})
         else:
@@ -135,6 +136,56 @@ class Cart(View):
     def delete(self, request):
         del request.session['cart']
         return JsonResponse({'message':"Cart Out"})
+
+
+class OrderProcess(View):
+    def get(self, request):
+        if 'user_id' in request.session:
+            if Order.objects.filter(user_id=request.session['user_id']['id']):
+                order = Order.objects.get(user_id=request.session['user_id']['id'])
+                return JsonResponse({'message':"Orderssssssss", 'order':list(order.product.values().all())})
+            else:
+                return JsonResponse({'message':'need to guest Id'})
+        
+    def post(self, request):
+        print('request', request)
+        body = json.loads(request.body.decode())
+        print('order process body', body)
+        print('order user', request.session['user_id']['id'])
+        userId = request.session['user_id']['id']
+        matching_user = Order.objects.filter(user_id=userId)
+        if len(matching_user) < 1:
+            Order.objects.create(user=User.objects.get(id=userId))
+        
+            # print('testing', Order.objects.values().all())
+
+            for x in body:
+                print('hi\n', x)
+            #     # print('x id', x['id'])
+                print('whats wrong1')
+                order = Order.objects.get(user_id=userId)
+                products = Product.objects.get(id=x['id'])
+            #     # print('\n\n\nproducts', products)
+                order.product.add(products)
+                print('whats wrong2')
+            order.save()
+            print('whats wrong3')
+            # print('testing', Order.objects.values().all())
+            # testing = Order.objects.filter(id=23).values().all()
+            # print('testing one order', testing.product.all())
+            print('\n\ntesting one order1', order.product.all().values())
+            # Object.objects.values().filter(category = category)
+            # print('\n\ntesting one order1', order.product.all().values())
+
+            return JsonResponse({'message':"Order", 'order':list(Order.objects.get(user_id=userId).product.values().all())})
+
+    def delete(self, request):
+        if 'user_id' in request.session:
+            order = Order.objects.filter(user_id=request.session['user_id']['id'])
+            order.delete()
+            return JsonResponse({'message':"Order deleted"})
+        else:
+            return JsonResponse({'message':'need to guest Id for delete'})
 
 # class Author(models.Model):
 #     name = models.CharField(max_length=255)
