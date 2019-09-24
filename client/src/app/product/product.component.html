@@ -53,7 +53,7 @@
     </table>
     
     <h2>Upload Product</h2>
-    <form (submit)="onSubmit()" class="form-group col-8">
+    <form (submit)="onProductSubmit()" class="form-group col-8">
         <div class="form-row">
             <div class="form-label-group col">
                 <input name="newProduct.name" [(ngModel)]="newProduct.name" #name="ngModel" type="text" placeholder="Product Name" class="form-control" required autofocus>
@@ -75,6 +75,9 @@
         </div>
         <div class="form-label-group">
             <textarea name="newProduct.description" [(ngModel)]="newProduct.description" #description="ngModel" placeholder="Product Description" class="form-control" cols="30" rows="10" required autofocus></textarea>
+        </div>
+        <div class="form-group">
+            <input name="image" type="file" class="form-control" (change)="changeImage($event)" required autofocus>
         </div>
         <!-- <div class="custom-file">
             <input name="newProduct.file" [(ngModel)]="newProduct.file" #file="ngModel" id="inputGroupFile01" type="file" class="custom-file-input">

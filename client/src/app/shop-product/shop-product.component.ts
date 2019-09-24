@@ -12,6 +12,7 @@ export class ShopProductComponent implements OnInit {
   constructor(private _httpService:HttpService) { }
 
   ngOnInit() {
+    
   }
   productToCart(product) {
     this._httpService.addCart(product)

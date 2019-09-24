@@ -15,9 +15,7 @@ export class HttpService {
 
   currentProduct = this.productInfo.asObservable();
 
-  constructor(private _http: HttpClient) {
-    // this.productInfo.subscribe(console.log)
-   }
+  constructor(private _http: HttpClient) { }
 
   // getNextProduct(products:any) {
   //   // console.log('2');
@@ -28,18 +26,18 @@ export class HttpService {
   //   this.productInfo.next(products)
   // }
 
+
   orderProcess(order) {
-    console.log('hi?');
-    
+    console.log('hi?');  
     return this._http.post('api/order', order)
   }
   getUserOrder() {
-    // make this one also like add Cart with behaviorSubject
     return this._http.get('api/order')
   }
   deleteOrder() {
     return this._http.delete('api/order')
   }
+
 
   cart() {
     this._http.get('api/cart').subscribe(data => {
@@ -51,7 +49,6 @@ export class HttpService {
     this._http.post('api/cart', product).subscribe(data => {
       console.log('service cart check',data['cart'].length);
       this.cartLength.next(data['cart'].length)
-      // this.productInfo.next(data)
     })
   }
   deleteCart() {
@@ -62,34 +59,26 @@ export class HttpService {
   getAll() {
     return this._http.get('api/tasks')
   }
+
   create(user) {
     return this._http.post('api/tasks', user)
   }
   findUser(user) {
-    // console.log('service', user);
-    // this._http.post('api/tasks/user', user).subscribe((data:any) => {
-      // this.userInfo.next(data)
-    // })
     return this._http.post('api/tasks/user', user)
   }
   logInUser() {
-    this._http.get('api/tasks/user').subscribe((data:any) => {
-      // console.log('helllllo', data);
-      
+    this._http.get('api/tasks/user').subscribe((data:any) => {      
       this.userInfo.next(data)
     })
-    // return this._http.get('api/tasks/user')
   }
   loggedInUser(id) {
-    // this._http.get('api/user/' +id).subscribe((data:any) => {
-    //   // console.log('data', data.user[0]);
-    //   this.userInfo.next(data.user[0])
-    // })
     return this._http.get('api/user/' +id)
   }
   logOutUser() {
     return this._http.get('api/user/logout')
   }
+
+
   allProduct() {
     return this._http.get('api/product')
   }
@@ -100,13 +89,13 @@ export class HttpService {
     return this._http.put('api/product/'+ product_id, product)
   }
   deleteProduct(id) {
-    // console.log('hit deleteProduct service');
     return this._http.delete('api/product/' + id)
   }
   getOneProduct(id) {
-    // console.log('hit getOneProduct Service', id)
     return this._http.get('api/product/' + id)
   }
+
+
   categoryFilter(category) {
     return this._http.get('api/product/' + category)
   }

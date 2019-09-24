@@ -23,16 +23,7 @@ export class CartComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
-
-    // this._httpService.productInfo.subscribe((data) => {
-    //   console.log('cart component check', data);
-    //   this.allProducts = data
-    // })
-    // this.cartSum()
     this._httpService.cart().subscribe((data:any)=> {
-      // for(let i = 0; i < data.cart.length; i++) {
-      //   console.log('test for loop', i);
-      // }
       if(data.cart || data.cart !=undefined) {
         data.cart.forEach((obj) => {
           console.log('test for each', obj.name);
@@ -62,7 +53,7 @@ export class CartComponent implements OnInit {
   }
   cartTotalSum(data) {
     console.log('\n\n\n***************************\n');
-    console.log(' something console log here\n');
+    console.log(' cart component console log here\n');
     console.log('***************************\n\n\n');    
     let sum = 0
     if(data) {

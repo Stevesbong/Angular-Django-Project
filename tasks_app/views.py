@@ -2,8 +2,12 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views import View
 from django.contrib import messages
+
+from django.core import serializers
+from itertools import chain
+
 import json, bcrypt
-from .models import User, UserManager, Product, Order
+from .models import User, UserManager, Product, Order, Image
 
 # Create your views here.
 
@@ -76,28 +80,54 @@ class UserLogOut(View):
 
 class Products(View):
     def get(self, request):
-        # print('came in get view')
+        print('came in get view')
         access = True
         if 'logged_in' not in request.session:
             access = False
-        return JsonResponse({'message':"product get Success", 'products':list(Product.objects.values().all()), 'logged_in':access})
+        product = Product.objects.all()
+        img = Image.objects.all()
+        test = list(chain(product, img))
+        qs = Product.objects.all()
+        # for a in qs:
+        #     print('testtttttttt', a.image_of_product.all().values())
+        # print('test qs', qs.values())
+        sometest = Image.objects.values('product__name','product__description','product__price','product__stock','product__category', 'image').distinct()
+        print('some test', sometest)
+        twotest = Product.objects.values('id', 'name', 'description', 'price', 'stock', 'category', 'image_of_product__image')
+        print('soooooooooooo test', twotest)
+        # test = Product.objects.raw('SELECT * FROM tasks_app_product JOIN tasks_app_image ON tasks_app_product.id = tasks_app_image.product_id')
+        print('\n\nproduct all', test)
+
+        data = serializers.serialize('json', qs)
+        
+        print('image all', product)
+        return JsonResponse({'message':"product get Success", 'products':list(twotest), 'logged_in':access})
 
     def post(self, request):
         body = json.loads(request.body.decode())
+        # print('body comming', body)
+        Product.objects.create(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
+        Image.objects.createImg(body)
+
         # print('came in post view', type(body), body)
-        product = Product.objects.create(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
         return JsonResponse({'message':"product post Success"})
 
 
 class ProductsDetail(View):
     def get(self, request, product_id):
         # print('came in get detail view', product_id)
-        product = Product.objects.filter(id = product_id).values()
-        return JsonResponse({'message':"Product get view Success", 'product':list(product)})
+        product = Product.objects.filter(id = product_id)
+        print('see product', product)
+        img = Image.objects.filter(product=product[0])
+        print('trying to get image', img)
+        return JsonResponse({'message':"Product get view Success", 'product':list(product.values()), 'image':list(Image.objects.filter(product=product[0]).values().all())})
 
     def put(self, request, product_id):
         body = json.loads(request.body.decode())
-        Product.objects.filter(id = product_id).values().update(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
+        product = Product.objects.filter(id = product_id).values().update(name = body['name'], description = body['description'], price = body['price'], stock = body['stock'], category = body['category'])
+        print('what is product', product)
+        Image.objects.createImg(body)
+
         return JsonResponse({'message':"Product put view Success"})
 
     def delete(self, request, product_id):
@@ -109,7 +139,7 @@ class ProductsDetail(View):
 
 class ProductsCategory(View):
     def get(self, request, category):
-        return JsonResponse({'message':"Product category Filter", 'category':list(Product.objects.values().filter(category = category))})
+        return JsonResponse({'message':"Product category Filter", 'category':list(Product.objects.values('id', 'name', 'description', 'price', 'stock', 'category', 'image_of_product__image').filter(category = category))})
 
 
 class Cart(View):
@@ -166,18 +196,18 @@ class OrderProcess(View):
                 order = Order.objects.get(user_id=userId)
                 products = Product.objects.get(id=x['id'])
             #     # print('\n\n\nproducts', products)
-                order.product.add(products)
+                order.products.add(products)
                 print('whats wrong2')
             order.save()
             print('whats wrong3')
             # print('testing', Order.objects.values().all())
             # testing = Order.objects.filter(id=23).values().all()
             # print('testing one order', testing.product.all())
-            print('\n\ntesting one order1', order.product.all().values())
+            print('\n\ntesting one order1', order.products.all().values())
             # Object.objects.values().filter(category = category)
             # print('\n\ntesting one order1', order.product.all().values())
 
-            return JsonResponse({'message':"Order", 'order':list(Order.objects.get(user_id=userId).product.values().all())})
+            return JsonResponse({'message':"Order", 'order':list(Order.objects.get(user_id=userId).products.values().all())})
 
     def delete(self, request):
         if 'user_id' in request.session:

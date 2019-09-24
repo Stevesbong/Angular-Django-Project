@@ -1,16 +1,14 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of allProducts | paginate:{itemsPerPage: 9, currentPage:p}">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of allProducts.products | paginate:{itemsPerPage: 9, currentPage:p}">
             <div class="card h-100">
-                <a href="" [routerLink]="['/product', item.id]"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="" [routerLink]="['/product', item.id]"><img [ngStyle]="{'background-size':'cover', 'height':'348px'}" class="card-img-top" src="../../assets/img/{{item.image_of_product__image}}" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
                         <a href="" [routerLink]="['/product', item.id]">{{item.name}}  </a>
                     </h4>
                     <h5>$ {{item.price}}</h5>
-                    <!-- <p class="card-text">Description: {{item.description}}</p> -->
-                    <p class="card-text">{{ (item.description.length > 100) ? (item.description | slice:0:100)+'..' : (item.description) }}</p>
-                    <!-- <button class="btn btn-outline-info" *ngIf="item.description.length > 100 " (click)="oneDescription(item.id)">Read More</button> -->
+                    <p class="card-text">Description: {{ (item.description.length > 100) ? (item.description | slice:0:100)+'..' : (item.description) }}</p>
                     <h5 [ngStyle]="{'color': 'red'}" *ngIf="item.stock == 0; else outOfStock">Out Of order!</h5>
                     <ng-template #outOfStock>
                         <h5 [ngStyle]="{'color': 'red'}" *ngIf="item.stock > 5; else lessThanFive"></h5>
