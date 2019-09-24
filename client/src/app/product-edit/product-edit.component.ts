@@ -41,5 +41,27 @@ export class ProductEditComponent implements OnInit {
       this._router.navigate(['/product'])
     })
   }
+  changeImage(event) {
+    let _this = this;
+    let file = event.target.files[0]
+    console.log('check _this', _this);
+    console.log('check filename', file.name);
+    
+    let reader = new FileReader();
+    reader.addEventListener("load", function() {                
+      _this.oneProduct['filename'] = file.name;                
+      _this.oneProduct['image'] = reader.result;
+      
+  }, false);
+    if (file) {
+      // console.log('hhhhh', file.name);
+      // console.log('hhhhh2', reader.result);
+      
+      reader.readAsDataURL(file)
+      // console.log('what is it', reader.readAsDataURL(file));
+      
+    }
+    
+  }
 
 }

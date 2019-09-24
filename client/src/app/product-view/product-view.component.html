@@ -1,19 +1,21 @@
 <div *ngIf="oneProduct" class="container-fluid">
     <div class="row">
-        <div class="col-5 images">
-            <img src="https://cdn.pixabay.com/photo/2018/05/28/22/11/message-in-a-bottle-3437294__340.jpg" alt="">
+        <div class="col-5 images" [ngStyle]="{'height': '35em'}">
+            <img src="../../assets/img/{{oneProduct.image[0].image}}" [ngStyle]="{'width' : '100%', 'height': '100%'}" alt="">
+            <!-- <img src="../../../src/assets/img/{{oneProduct.image[0].image}}" [ngStyle]="{'width' : '100%', 'height': '100%'}" alt=""> -->
+            <!-- <img src="{{oneProduct.image[0].image}}" [ngStyle]="{'width' : '100%', 'height': '100%'}" alt=""> -->
         </div>
         <div class="col-7 productsDescription">
             <div>
-                <h2>{{oneProduct.name}}</h2>
-                <h4>$ {{oneProduct.price}}</h4>
-                <p>Product Quantity: {{oneProduct.stock}} (delete later)</p>
+                <h2>{{oneProduct.product[0].name}}</h2>
+                <h4>$ {{oneProduct.product[0].price}}</h4>
+                <p>Product Quantity: {{oneProduct.product[0].stock}} (delete later)</p>
                 <p class="outStock" *ngIf="oneProduct.stock == 0 else elseblock" > Out of Stock</p>
                 <ng-template #elseblock>
                    <p>In Stock</p>
                 </ng-template>
-                <p [ngStyle]="{'word-wrap': 'break-word'}">Product Description: {{oneProduct.description}}</p>
-                <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-info" (click)="productToCart()" >Add to Cart</button>
+                <p [ngStyle]="{'word-wrap': 'break-word'}">Product Description: {{oneProduct.product[0].description}}</p>
+                <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-info" (click)="productToCart(oneProduct)" >Add to Cart</button>
                 <!-- <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-info" (click)="productToCart(oneProduct.id)" >Add to Cart</button> -->
                 <button [disabled]="oneProduct.stock == 0" class="btn btn-outline-success">Buy It now</button>
                 <button class="btn btn-outline-dark" *ngIf="oneUser && oneUser.first_name=='admin'" [routerLink]="['edit']" >Edit</button>

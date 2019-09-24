@@ -5,6 +5,7 @@ import bcrypt
 from django.conf import settings
 import os, time, base64
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+
 ALLOWED_EXTENSIONS = ("jpg", "jpeg", "png", "gif")
 
 # Create your models here.
@@ -49,6 +50,29 @@ class UserManager(models.Manager):
         elif not bcrypt.checkpw(postBody['password'].encode(), matching_user[0].password.encode()):
             errors['login_password'] = "Invalied Credential"
         return errors
+class PostManager(models.Manager):
+    def createImg(self, data):
+        print('create comming', data)
+        product = Product.objects.filter(name=data['name'])
+        print('\n\nwhat is in product,', product.values())
+        post = Image.objects.create(product=product[0])
+        print('wat is in post', post)
+        if 'filename' in data and 'image' in data:
+            extension = data['filename'].split('.')[-1].lower()
+            if extension in ALLOWED_EXTENSIONS:
+                post.filename = data['filename']
+                new_filename = str(time.time()).split('.')[0] + '.' + extension
+                print('what is new file name', new_filename)
+                print('\n\nwhat is new static name', os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, new_filename))
+                print('\n\nwhat is new static name2', settings.MEDIA_URL)
+                img_path = os.path.join(settings.MEDIA_ROOT, new_filename)
+                with open (img_path, 'wb') as img:
+                    img.write(base64.b64decode(data['image'].split(',')[-1]))
+                    post.image = new_filename
+        print('what is post', post.image)
+        print('\n\nwhat is post2', post.filename)
+        # print('\n\nwhat is post2', post.product.name)
+        post.save()
 
 class User(models.Model):
     first_name = models.CharField(max_length=255)
@@ -71,9 +95,16 @@ class Product(models.Model):
 class Image(models.Model):
     product = models.ForeignKey(Product, related_name="image_of_product", on_delete=models.CASCADE)
     image = models.FileField(upload_to='media/')
+    objects = PostManager()
 
 class Order(models.Model):
-    product = models.ManyToManyField(Product, related_name = "orders")
+    products = models.ManyToManyField(Product, related_name = "orders")
     user = models.ForeignKey(User, related_name = "user_order", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Checkout(models.Model):
+    emial = models.CharField(max_length=255)
+    token = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -122,7 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
-SESSION_EXPIRE_SECONDS = 5 * 60
+SESSION_EXPIRE_SECONDS = 10 * 60
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # SESSION_COOKIE_AGE = 10 * 60 #
@@ -130,6 +130,8 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'client/dist/client')
 STATICFILES_STORAGE = 'spa.storage.SPAStaticFilesStorage'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'client/src/assets/img')
+MEDIA_URL = 'media/'
 
 
 STATICFILES_DIR = {

@@ -27,20 +27,17 @@ export class ProductViewComponent implements OnInit {
     })
     this._httpService.userInfo.subscribe((data:any) => {
       this.oneUser = data.user
-      // console.log('user', data);
-      // console.log('user2', this.oneUser);
-      // console.log('user3', this.oneUser.first_name);
-      
-      
-      
     })
 
   }
   getProductDetail(id) {
     // console.log('method id', id)
     this._httpService.getOneProduct(id).subscribe((data:any) => {
-      // console.log('get data from django server', data)
-      this.oneProduct = data.product[0]
+      console.log('get data from django server', data)
+      console.log('test', data.product[0]);
+      console.log('test2', data.image[0].image);
+      
+      this.oneProduct = data
     })
   }
 

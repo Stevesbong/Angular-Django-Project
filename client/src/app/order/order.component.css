@@ -4,3 +4,6 @@ div.orderProcess {
 div.orderProcess button {
     margin:0.8em
 }
+.table {
+    text-align: right;
+}
