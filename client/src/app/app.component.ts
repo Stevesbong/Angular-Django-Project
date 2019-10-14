@@ -17,7 +17,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    // this.getOneUser()
     this._httpService.cart().subscribe((data)=> {
       this._httpService.productInfo.next(data['cart'])
       if(data['cart']) {
@@ -25,58 +24,23 @@ export class AppComponent implements OnInit{
       }
     })
     this._httpService.cartLength.subscribe(cartNum=> {
-      // console.log('hhhh', cartNum);
       this.cartItem = cartNum
     })
-    // this._httpService.userInfo.subscribe((data:any) => {
-    //   console.log('userinof', data);
-    //   this.oneUser = data
-      
-    // })
     this._httpService.logInUser()
     this._httpService.userInfo.subscribe((data:any) => {
-      // console.log('userinfo', data);
       if(data != undefined){
-        // console.log('lllllllllll');
         this.oneUser = data.user
-        
       }
-      
     })
-
-    
-    // need to put eventEmitter?
   }
-
-  // getOneUser() {
-  //   this._httpService.logInUser().subscribe((data:any) => {
-  //     // console.log('logInUser', data, data.id);
-  //     if(data.id){
-  //       // console.log('check id', data.id);
-  //       this._httpService.loggedInUser(data.id).subscribe((data:any) => {
-  //         // console.log('data from loggedInUser', data.user[0]);
-  //         this.oneUser = data.user[0]
-  //       })
-  //     } else {
-  //       // console.log('error');
-  //       // this._router.navigate(['/'])
-  //     }
-  //   })
-  // }
-
-
 
   logOut() {
     this.oneUser = ""
     this._httpService.logOutUser().subscribe((data:any) => {
-      // console.log(data)
       if(data) {
-        // console.log('hello');
         this._router.navigate(['/'])
-        // console.log('another hello');
       }
     })
-    console.log('user logout');
     this._router.navigate(['/'])
   }
 }

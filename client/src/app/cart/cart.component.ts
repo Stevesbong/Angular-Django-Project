@@ -13,7 +13,7 @@ export class CartComponent implements OnInit {
 
   // products:any = []
   allProducts:any
-  products:any
+  // products:any
   subPrice:any = 0
   totalPrice:any = 0
   counter:any = {}
@@ -26,21 +26,14 @@ export class CartComponent implements OnInit {
     this._httpService.cart().subscribe((data:any)=> {
       if(data.cart || data.cart !=undefined) {
         data.cart.forEach((obj) => {
-          console.log('test for each', obj.name);
           this.counter[obj.name] = (this.counter[obj.name] || 0 ) +1
         })
-        console.log('counter test', this.counter);
-        console.log(data.cart);
-        this.products = data.cart
-        console.log('unique test', this.getUnique(data.cart, 'name'));
         this.testingProduct = this.getUnique(data.cart, 'name')
         for(let i = 0; i < this.testingProduct.length; i++) {
-          console.log('test', this.counter[this.testingProduct[i].name]);
           this.testingProduct[i].quantity = this.counter[this.testingProduct[i].name]
         }
         this.allProducts = this.testingProduct
         this.cartTotalSum(this.allProducts)
-        console.log('from cart component test all product', this.allProducts);
       }
     })
     
@@ -52,12 +45,8 @@ export class CartComponent implements OnInit {
     return unique
   }
   cartTotalSum(data) {
-    console.log('\n\n\n***************************\n');
-    console.log(' cart component console log here\n');
-    console.log('***************************\n\n\n');    
     let sum = 0
     if(data) {
-      console.log('from cart component data exists?', data);
       for(let i = 0; i < data.length; i++) {
         sum += +(data[i].quantity * data[i].price)
       }
@@ -67,20 +56,13 @@ export class CartComponent implements OnInit {
   }
 
   onSubmitCart() {
-    console.log('productsssss', this.products);
-    
-    this._httpService.orderProcess(this.products).subscribe((data:any) => {
-      // console.log('what is it?', data);
-      
+    this._httpService.orderProcess(this.allProducts).subscribe((data:any) => {
     })
-    // this.deleteCart()
     this._router.navigate(['/order'])
   }
   deleteCart() {
     this._httpService.deleteCart().subscribe((data)=> {
-      console.log('deleted', data)
       this._httpService.cart().subscribe((data)=> {
-        console.log('hi', data);
         this.allProducts = data['cart']
       })
     })

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import bsCustomFileInput from 'bs-custom-file-input';
 import { HttpService } from '../http.service';
 import { Router } from '@angular/router';
 
@@ -17,7 +16,6 @@ export class ProductComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
-    // bsCustomFileInput.init()
     this.getAllProduct()
     this.newProduct = {
       name:"",
@@ -25,50 +23,33 @@ export class ProductComponent implements OnInit {
       price:"",
       stock:"",
       category:"",
-      // file:""
+      image:""
     }
 
   }
 
   onProductSubmit() {
-    // console.log('onsubmit')
-    // console.log(this.newProduct)
-
     this._httpService.createProduct(this.newProduct).subscribe((data:any) => {
-      // console.log('get from createProduct view', data)
       this.getAllProduct()
     })
   }
   getAllProduct() {
-    // console.log('get all Product')
     this._httpService.allProduct().subscribe((data:any) => {
-      
-      // console.log('helllllll');
-      // console.log(data.logged_in);
       if(data.logged_in == true) {
-        // console.log('get all product from django server')
-        // console.log('data from django server', data.products);
         this.allProducts = data.products
       } else {
-        // console.log('hi');
         this._router.navigate(['/'])
       }
-      
     })
   }
   deleteProduct(id) {
-    // console.log('id come in', id)
     this._httpService.deleteProduct(id).subscribe((data:any) => {
-      // console.log('get data from django server', data)
       this.getAllProduct()
     })
   }
   changeImage(event) {
     let _this = this;
     let file = event.target.files[0]
-    console.log('check _this', _this);
-    console.log('check filename', file.name);
-    
     let reader = new FileReader();
     reader.addEventListener("load", function() {                
       _this.newProduct['filename'] = file.name;                
@@ -76,14 +57,7 @@ export class ProductComponent implements OnInit {
       
   }, false);
     if (file) {
-      // console.log('hhhhh', file.name);
-      // console.log('hhhhh2', reader.result);
-      
       reader.readAsDataURL(file)
-      // console.log('what is it', reader.readAsDataURL(file));
-      
     }
-    
   }
-
 }

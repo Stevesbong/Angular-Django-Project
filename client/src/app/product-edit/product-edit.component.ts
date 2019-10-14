@@ -23,20 +23,15 @@ export class ProductEditComponent implements OnInit {
       category:""
     }
     this._activatedRoute.params.subscribe((params:Params) => {
-      // console.log('params', params.id)
       this.getProductDetail(params.id)
     })
   }
   getProductDetail(id) {
-    // console.log('method id', id)
     this._httpService.getOneProduct(id).subscribe((data:any) => {
-      // console.log('get data from django server', data)
       this.oneProduct = data.product[0]
     })
   }
   onSubmit() {
-    // console.log('onsubmit')
-    // console.log(this.oneProduct)
     this._httpService.editProduct(this.oneProduct.id , this.oneProduct).subscribe((data:any) => {
       this._router.navigate(['/product'])
     })
@@ -44,9 +39,6 @@ export class ProductEditComponent implements OnInit {
   changeImage(event) {
     let _this = this;
     let file = event.target.files[0]
-    console.log('check _this', _this);
-    console.log('check filename', file.name);
-    
     let reader = new FileReader();
     reader.addEventListener("load", function() {                
       _this.oneProduct['filename'] = file.name;                
@@ -54,14 +46,7 @@ export class ProductEditComponent implements OnInit {
       
   }, false);
     if (file) {
-      // console.log('hhhhh', file.name);
-      // console.log('hhhhh2', reader.result);
-      
       reader.readAsDataURL(file)
-      // console.log('what is it', reader.readAsDataURL(file));
-      
     }
-    
   }
-
 }

@@ -17,18 +17,7 @@ export class HttpService {
 
   constructor(private _http: HttpClient) { }
 
-  // getNextProduct(products:any) {
-  //   // console.log('2');
-  //   console.log('service',this.productInfo);
-  //   // console.log('service', JSON.parse(JSON.stringify(this.productInfo)));
-    
-  //   console.log('behavior service', products);  
-  //   this.productInfo.next(products)
-  // }
-
-
   orderProcess(order) {
-    console.log('hi?');  
     return this._http.post('api/order', order)
   }
   getUserOrder() {
@@ -36,6 +25,9 @@ export class HttpService {
   }
   deleteOrder() {
     return this._http.delete('api/order')
+  }
+  checkout(products, totalprice) {
+    return this._http.post('api/checkout', products, totalprice)
   }
 
 
@@ -47,7 +39,6 @@ export class HttpService {
   }
   addCart(product) {
     this._http.post('api/cart', product).subscribe(data => {
-      console.log('service cart check',data['cart'].length);
       this.cartLength.next(data['cart'].length)
     })
   }
@@ -59,7 +50,6 @@ export class HttpService {
   getAll() {
     return this._http.get('api/tasks')
   }
-
   create(user) {
     return this._http.post('api/tasks', user)
   }

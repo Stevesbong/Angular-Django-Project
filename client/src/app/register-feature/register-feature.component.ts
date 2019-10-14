@@ -25,9 +25,7 @@ export class RegisterFeatureComponent implements OnInit {
     }
   }
   onSubmit() {
-    console.log(this.newUser)
     this._httpService.create(this.newUser).subscribe((data:any)=> {
-      console.log(data)
       if(!data.hasOwnProperty('errors')) {
         this._router.navigate(['/login'])
       } else {
@@ -38,19 +36,6 @@ export class RegisterFeatureComponent implements OnInit {
 
   getUser() {
     this._httpService.getAll().subscribe((data:any) => {
-      console.log(data);
-      
     })
   }
-  // makeUser() {
-  //   let tas = {
-  //     'name': "Pappy",
-  //     'isComplete': true
-  //   }
-  //   this._httpService.create(tas).subscribe((data:any)=> {
-  //     console.log(data);
-      
-  //   })
-  // }
-
 }

@@ -15,18 +15,19 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.urls import path
-from tasks_app.views import Users, OneUser, UserLogOut, Products, ProductsDetail, ProductsCategory, Cart, OrderProcess
+from tasks_app.views import Users, OneUser, UserLogOut, Products, ProductsDetail, ProductsCategory, Cart, OrderProcess, CheckoutProcess
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
     path('api/tasks', Users.as_view()),
     path('api/tasks/user', OneUser.as_view()),
-    # path('api/user/<int:user_id>', UserDetail.as_view()),
     path('api/user/logout', UserLogOut.as_view()),
+
     path('api/product', Products.as_view()),
     path('api/product/<int:product_id>', ProductsDetail.as_view()),
     path('api/product/<category>', ProductsCategory.as_view()),
+    
     path('api/cart', Cart.as_view()),
 
-    path('api/order', OrderProcess.as_view())
+    path('api/order', OrderProcess.as_view()),
+    path('api/checkout', CheckoutProcess.as_view())
 ]
