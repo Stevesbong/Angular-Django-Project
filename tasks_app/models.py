@@ -13,15 +13,6 @@ ALLOWED_EXTENSIONS = ("jpg", "jpeg", "png", "gif")
 class UserManager(models.Manager):
     def register_validator(self, postBody):
         errors = {}
-        # print('test in models', type(postBody), postBody)
-        # print('test each body', postBody["first_name"])
-        # print('test password', postBody['password'])
-        # if 'first_name' in postBody:
-        #     print('yes')
-        # else:
-        #     print('no')
-        # for key, val in postBody.items():
-        #     print(key, ' and ', val)
         matching_user = User.objects.filter(email = postBody['email'])
         if len(postBody['first_name']) < 3 or postBody['first_name'] == "":
             errors['first_name'] = "First name must be more than three characters."
@@ -38,10 +29,6 @@ class UserManager(models.Manager):
         return errors
 
     def login_validator(self, postBody):
-        errors = {}
-        # print('models',type(postBody), postBody)
-        # print(postBody['email'])
-        # print(postBody['password'])
         matching_user = User.objects.filter(email = postBody['email'])
         if len(matching_user) == 0:
             errors['login_email'] = "Invalid Credential"
@@ -52,26 +39,17 @@ class UserManager(models.Manager):
         return errors
 class PostManager(models.Manager):
     def createImg(self, data):
-        print('create comming', data)
         product = Product.objects.filter(name=data['name'])
-        print('\n\nwhat is in product,', product.values())
         post = Image.objects.create(product=product[0])
-        print('wat is in post', post)
         if 'filename' in data and 'image' in data:
             extension = data['filename'].split('.')[-1].lower()
             if extension in ALLOWED_EXTENSIONS:
                 post.filename = data['filename']
                 new_filename = str(time.time()).split('.')[0] + '.' + extension
-                print('what is new file name', new_filename)
-                print('\n\nwhat is new static name', os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, new_filename))
-                print('\n\nwhat is new static name2', settings.MEDIA_URL)
                 img_path = os.path.join(settings.MEDIA_ROOT, new_filename)
                 with open (img_path, 'wb') as img:
                     img.write(base64.b64decode(data['image'].split(',')[-1]))
                     post.image = new_filename
-        print('what is post', post.image)
-        print('\n\nwhat is post2', post.filename)
-        # print('\n\nwhat is post2', post.product.name)
         post.save()
 
 class User(models.Model):
@@ -104,7 +82,7 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Checkout(models.Model):
-    emial = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
     token = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

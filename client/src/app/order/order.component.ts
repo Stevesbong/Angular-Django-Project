@@ -8,15 +8,16 @@ import { HttpService } from './../http.service'
   '../register-feature/register-feature.component.css']
 })
 export class OrderComponent implements OnInit {
-
+  
   allProducts:any
   totalPrice:any = {}
   counter:any = {}
+  sessionId:any
   constructor(private _httpService: HttpService) { }
 
   ngOnInit() {
+    this.loadStripe()
     this._httpService.currentProduct.subscribe((data:any) => {
-      console.log('currentproduct data', data);
       if(data.cart) {
         data.cart.forEach((obj) => {
           this.counter[obj.name] = (this.counter[obj.name] || 0) +1
@@ -26,7 +27,6 @@ export class OrderComponent implements OnInit {
           this.allProducts[i].quantity = this.counter[this.allProducts[i].name]
         }
         this.totalSum(this.allProducts)
-
       }
     })
   }
@@ -39,17 +39,12 @@ export class OrderComponent implements OnInit {
 
   deleteOrder() {
     this._httpService.deleteOrder().subscribe((data:any) => {
-      console.log('delete order data', data);
       this.allProducts = data.order
     })
   }
   totalSum(data) {
-    console.log('\n\n\n***************************\n');
-    console.log(' something console log here\n');
-    console.log('***************************\n\n\n');    
     let sum = 0
     if(data) {
-      console.log('from order component data exists? order', data);
       for(let i = 0; i < data.length; i++) {
         sum += +(data[i].quantity * data[i].price)
       }
@@ -58,73 +53,37 @@ export class OrderComponent implements OnInit {
     }
     
   }
+  checkoutSubmit() {
+    this._httpService.checkout(this.allProducts, this.totalPrice).subscribe((data:any) => {
+      this.sessionId = data.session.id
+    })
+  }
+  loadStripe() {
+    if(!window.document.getElementById('stripe-script')) {
+      var s = window.document.createElement("script");
+      s.id = "stripe-script";
+      s.type = "text/javascript";
+      s.src = "https://checkout.stripe.com/checkout.js";
+      window.document.body.appendChild(s);
+    }
+  }
+  pay(a) {
+    console.log('totla', a);
+    var amount= Math.round(a * 100) / 100
+    var handler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_I1GKO8q7IcCNvng7yGSMOWJr007FRNBIba',
+      locale:'auto',
+      token:function(token:any) {
+        console.log('token', token);
+        alert('Token Created!!');
+      }
+    })
+    handler.open({
+      name:"Steve's E-commerce",
+      description: '2 widgets',
+      amount: amount * 100
+    })
+    console.log('totla2', amount);
+  }
   
 }
-
-// console.log('\n\n\n***************************\n');
-// console.log(' something console log here\n');
-// console.log('***************************\n\n\n');
-
-
-// this._httpService.getUserOrder().subscribe((data:any) => {
-    //   console.log('data come', data);
-    //   this.allProducts = data.order
-    //   if(data.order) {
-    //     data.order.forEach((obj) => {
-    //       this.counter[obj.name] = (this.counter[obj.name] || 0) +1
-    //     })
-    //     console.log('counter test', this.counter);
-    //     this.allProducts = this.getUnique(data.order, 'name')
-    //     console.log('data after unique', this.allProducts);
-        
-    //     for(let i = 0; i< this.allProducts.length; i++) {
-    //       console.log('test', this.counter[this.allProducts[i].name]);
-    //       this.allProducts[i].quantity = this.counter[this.allProducts[i].name]
-    //     }
-    //     this.totalSum(this.allProducts)
-    //   }  
-    //   if(this.allProducts != undefined || this.allProducts != []) {
-    //     console.log('coming?');
-    //     this._httpService.cart().subscribe((data:any) => {
-
-    //       // console.log('ashofasd',data.cart);
-    //       if(data.cart != undefined) {
-    //         // console.log('hi');
-            
-    //         this._httpService.deleteCart().subscribe((data:any) => {
-    //             // console.log('deleted cart', data);
-    //             this._httpService.productInfo.next(data.cart)
-    //             this._httpService.cartLength.next(0)
-    //           })
-    //       }
-    //     })
-    //   }
-      
-    // })
-    // this._httpService.cart().subscribe((data:any) => {
-    //   console.log('data come order component', data);
-    //   this.allProducts = data.cart
-    //   if(data.cart) {
-    //     data.cart.forEach((obj) => {
-    //       this.counter[obj.name] = (this.counter[obj.name] || 0) +1
-    //     })
-    //     this.allProducts = this.getUnique(data.cart, 'name');
-    //     for(let i = 0; i < this.allProducts.length; i++) {
-    //       this.allProducts[i].quantity = this.counter[this.allProducts[i].name]
-    //     }
-    //     this.totalSum(this.allProducts)
-
-    //   }
-    //   if(this.allProducts != undefined || this.allProducts != [] ) {
-    //     this._httpService.cart().subscribe((data:any) => {
-    //       if(data.cart != undefined) {
-    //         this._httpService.deleteCart().subscribe((data:any) => {
-    //           this._httpService.productInfo.next(data.cart)
-    //           this._httpService.cartLength.next(0)
-    //         })
-    //       }
-    //     })
-    //   }
-    //   this.products = this.allProducts
-    //   console.log('test is working?',  this.products);
-    // })
