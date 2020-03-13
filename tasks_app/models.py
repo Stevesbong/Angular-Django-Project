@@ -29,6 +29,7 @@ class UserManager(models.Manager):
         return errors
 
     def login_validator(self, postBody):
+        errors = {}
         matching_user = User.objects.filter(email = postBody['email'])
         if len(matching_user) == 0:
             errors['login_email'] = "Invalid Credential"
