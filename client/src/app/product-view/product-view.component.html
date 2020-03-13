@@ -9,7 +9,7 @@
             <div>
                 <h2>{{oneProduct.product[0].name}}</h2>
                 <h4>$ {{oneProduct.product[0].price}}</h4>
-                <p>Product Quantity: {{oneProduct.product[0].stock}} (delete later)</p>
+                <p>Product Quantity: {{oneProduct.product[0].stock}}</p>
                 <p class="outStock" *ngIf="oneProduct.stock == 0 else elseblock" > Out of Stock</p>
                 <ng-template #elseblock>
                    <p>In Stock</p>
@@ -23,8 +23,3 @@
         </div>
     </div>
 </div>
-
-<p>
-    todo: in cart component emit delete cart button to app.component
-    todo: in view component emit delete cart button to app.component
-</p>

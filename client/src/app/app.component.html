@@ -1,4 +1,4 @@
-<h1 class="tracking-in-contract" [ngStyle]="{'text-align': 'center'}">Welcome to Steve Electronic Shop</h1>
+<h1 class="tracking-in-contract" [ngStyle]="{'text-align': 'center'}">Welcome to the ElecPods</h1>
 <div class="grid" *ngIf="oneUser; else elseBlock">
     <div class="admin">
         <a [routerLink]="['/product']" *ngIf="oneUser.first_name=='admin'">Product</a>

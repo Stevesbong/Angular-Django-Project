@@ -21,13 +21,13 @@
             <label>Email</label>
         </div>
         <div class="form-label-group">
-            <input type="text" name="newUser.password" [(ngModel)]="newUser.password" required [(ngModel)]="newUser.password" #password="ngModel" class="form-control sm-3" placeholder="Password" required autofocus>
+            <input type="password" name="newUser.password" [(ngModel)]="newUser.password" required [(ngModel)]="newUser.password" #password="ngModel" class="form-control sm-3" placeholder="Password" required autofocus>
             <small *ngIf="!password.valid && !errors.password" class="form-text text-muted">* Password is required</small>
             <small *ngIf="errors.password">* {{errors.password}}</small>
             <label>Password</label>
         </div>
         <div class="form-label-group">
-            <input type="text" name="newUser.confirm_password" [(ngModel)]="newUser.confirm_password" required [(ngModel)]="newUser.confirm_password" #confirm_password="ngModel" class="form-control sm-3" placeholder="Confirm Password" required autofocus>
+            <input type="password" name="newUser.confirm_password" [(ngModel)]="newUser.confirm_password" required [(ngModel)]="newUser.confirm_password" #confirm_password="ngModel" class="form-control sm-3" placeholder="Confirm Password" required autofocus>
             <small *ngIf="newUser.password != newUser.confirm_password" class="form-text text-muted">* Confirm password have to match with password!</small>
             <label>Confirm Password</label>
         </div>

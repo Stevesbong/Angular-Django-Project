@@ -9,7 +9,7 @@
       <label>Email</label>
     </div>
     <div class="form-label-group">
-      <input type="text" name="loginUser.password" [(ngModel)]="loginUser.password" required [(ngModel)]="loginUser.password" #password="ngModel" class="form-control sm-3" placeholder="Password" required autofocus>
+      <input type="password" name="loginUser.password" [(ngModel)]="loginUser.password" required [(ngModel)]="loginUser.password" #password="ngModel" class="form-control sm-3" placeholder="Password" required autofocus>
       <small *ngIf="!password.valid && !errors.password && !errors.login_password && !errors.login_email" class="form-text text-muted">* Password is required</small>
       <small *ngIf="errors.password">* {{errors.password}}</small>
       <small *ngIf="errors.login_password">* {{errors.login_password}}</small>

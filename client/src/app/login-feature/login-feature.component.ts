@@ -24,6 +24,8 @@ export class LoginFeatureComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log('hi?');
+    
     this._httpService.findUser(this.loginUser).subscribe((data:any)=> {
       if(!data.hasOwnProperty('errors')) {
         this._httpService.userInfo.next(data)
